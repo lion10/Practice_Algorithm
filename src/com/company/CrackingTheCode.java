@@ -1,6 +1,7 @@
 package com.company;
 
 import javafx.util.Pair;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -20,9 +21,54 @@ public class CrackingTheCode {
             boolean permutation = checkPermutation(word1,word2);
             System.out.println(permutation);
         }*/
-
-        System.out.println(replaceWhiteSpaceWith("Mr 3ohn Smith  "));
+        String a =     "momoo";
+        System.out.println(palindromePermutation(a.toLowerCase()));
     }
+
+    public static int getNumberChar(char temp){
+        int a = Character.getNumericValue('a');
+        int z = Character.getNumericValue('z');
+        int val = Character.getNumericValue(temp);
+        if(val >= a && val <= z){
+         //   System.out.println("val = " + (val - a));
+            return val - a;
+        }
+        return -1;
+    }
+
+
+    public static int[] frequencyForEachCharInString(String str){
+        int[] frequencyChar = new int[getNumberChar('z')-getNumberChar('a') +1 ];
+        for (char c: str.toCharArray()) {
+            if(getNumberChar(c) != -1){
+              //  System.out.println("c = " + getNumberChar(c));
+                frequencyChar[getNumberChar(c)]++;
+            }
+        }
+        return frequencyChar;
+    }
+    public static boolean checkIfMaxOneOdd(int[] arr){
+        boolean isMaxOddOneOnly = false;
+        for (int index: arr) {
+            if(index % 2 == 1){
+                if(isMaxOddOneOnly){
+                    return false;
+                } // that's mean i found more than one's odd in array ...
+                isMaxOddOneOnly =true;
+            }
+        }
+        return true;
+    }
+
+
+    public static boolean palindromePermutation(String str){
+        int[] arr  = frequencyForEachCharInString(str);
+        return checkIfMaxOneOdd(arr);
+
+    }
+
+
+
 
 
     public static String replaceWhiteSpaceWith(String a){
