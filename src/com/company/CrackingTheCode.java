@@ -21,8 +21,46 @@ public class CrackingTheCode {
             boolean permutation = checkPermutation(word1,word2);
             System.out.println(permutation);
         }*/
-        String a =     "momoo";
-        System.out.println(palindromePermutation(a.toLowerCase()));
+/*        String a =     "momoo";
+        System.out.println(palindromePermutation(a.toLowerCase()));*/
+
+        System.out.println(oneAway("pale","pale"));
+    }
+
+    public static  boolean oneAway(String str1 ,String str2 ){
+        int count = 0 ;
+        String temp = "";
+        // to check if there is replace
+        if(str1.length() == str2.length() ){
+            if (isThereMoreOneDiffrence(str1, str2, count))
+                return false;
+            return true ;
+        }else if(str1.length() +1 == str2.length()){ // to check if there is insert
+           temp =str2.substring(0,str1.length());
+            if (isThereMoreOneDiffrence(str1, temp, count))
+                return false;
+            return true ;
+        }else if(str1.length() == str2.length()  +1) {
+            temp = str1.substring(0,str2.length());
+            if (isThereMoreOneDiffrence(temp, str2, count))
+                return false;
+            return true ;
+
+        } else{
+        return false;
+        }
+    }
+
+
+    private static boolean isThereMoreOneDiffrence(String str1, String str2, int count) {
+        for (int i = 0; i < str1.length(); i++) {
+            if(str1.charAt(i) != str2.charAt(i)){
+                count++;
+                if(count > 1)
+                    return true;
+            }
+        }
+        return false;
     }
 
     public static int getNumberChar(char temp){
