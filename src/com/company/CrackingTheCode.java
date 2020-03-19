@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 import static java.lang.Integer.max;
+import static java.lang.Integer.parseInt;
 
 public class CrackingTheCode {
     private static int temp;
@@ -24,7 +25,22 @@ public class CrackingTheCode {
 /*        String a =     "momoo";
         System.out.println(palindromePermutation(a.toLowerCase()));*/
 
-        System.out.println(oneAway("pa","pale"));
+        System.out.println(stringCompression("a2b1c5a3"));
+    }
+
+    public static String stringCompression(String str){
+       StringBuilder stringBuilder = new StringBuilder();
+       int temp = 0;
+       int k = 0;
+       for (int i = 1; i <str.length() ; i+=2) {
+            temp = Character.getNumericValue(str.charAt(i));
+           for (int j = 0 ; j < temp ; j++) {
+               stringBuilder.append(str.charAt(k));
+           }
+           k+=2;
+        }
+
+       return new String(stringBuilder);
     }
 
     public static  boolean oneAway(String str1 ,String str2 ){
