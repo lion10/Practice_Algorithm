@@ -25,10 +25,32 @@ public class CrackingTheCode {
 /*        String a =     "momoo";
         System.out.println(palindromePermutation(a.toLowerCase()));*/
 
-        System.out.println(stringCompression("a2b1c5a3"));
+        System.out.println(stringCompression("aabcccccaaa"));
+    }
+    public static String stringCompression(String str){
+
+        StringBuilder compressed  = new StringBuilder();
+        int count = 1;
+        int i = 0;
+        for ( i = 0; i <str.length()-1 ; i++) {
+            if(str.charAt(i) == str.charAt(i+1)){
+           //     System.out.println("str.charAt(i) = " + str.charAt(i));
+                count++;
+            }
+            else {
+                compressed.append(str.charAt(i)).append(count);
+                count =1;
+            }
+        }
+
+        if(i == str.length()-1)
+            compressed.append(str.charAt(i)).append(count);
+
+        return compressed.length() < str.length() ? new String(compressed): str;
     }
 
-    public static String stringCompression(String str){
+
+    public static String stringDeCompression(String str){
        StringBuilder stringBuilder = new StringBuilder();
        int temp = 0;
        int k = 0;
@@ -39,7 +61,6 @@ public class CrackingTheCode {
            }
            k+=2;
         }
-
        return new String(stringBuilder);
     }
 
