@@ -1,14 +1,15 @@
-package com.company;
+package com.company.ArrayAndString;
 
 import javafx.util.Pair;
 import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
 
 import java.util.*;
 
 import static java.lang.Integer.max;
 import static java.lang.Integer.parseInt;
 
-public class CrackingTheCode {
+public class CrackingTheCode_ArraysAndString {
     private static int temp;
 
 
@@ -25,8 +26,39 @@ public class CrackingTheCode {
 /*        String a =     "momoo";
         System.out.println(palindromePermutation(a.toLowerCase()));*/
 
-        System.out.println(stringCompression("aabcccccaaa"));
+      System.out.println(stringCompression("a1b1"));  // stringCompression("a1b1") ==>  a1b1
+      System.out.println(stringDeCompression("a1b1")); // stringDeCompression("a1b1") ==> ab
+     //   System.out.println(rotate(new int[][]{{1,2,3},{4,5,6},{7,8,9}}));
+
     }
+    @Test
+    public static boolean rotate(int[][] matrix) {
+        if (matrix.length == 0 || matrix.length != matrix[0].length) return false; // Not a square
+        int n = matrix.length;
+        for (int layer = 0; layer < n / 2; layer++) {
+            int first = layer;
+            int last = n - 1 - layer;
+            for(int i = first; i < last; i++) {
+                int offset = i - first;
+                int top = matrix[first][i]; // save top
+
+                // left -> top
+                matrix[first][i] = matrix[last-offset][first];
+
+                // bottom -> left
+                matrix[last-offset][first] = matrix[last][last - offset];
+
+                // right -> bottom
+                matrix[last][last - offset] = matrix[i][last];
+
+                // top -> right
+                matrix[i][last] = top; // right <- saved top
+            }
+        }
+        return true;
+    }
+
+
     public static String stringCompression(String str){
 
         StringBuilder compressed  = new StringBuilder();
