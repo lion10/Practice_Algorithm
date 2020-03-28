@@ -1,7 +1,9 @@
 package com.company.LinkedList;
 
 
-
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Hashtable;
 
 public class Node {
     int data ;
@@ -12,7 +14,10 @@ public class Node {
 
 }
 class LinkedList{
+
     Node head ;
+
+
     void append(int data){
         if(head == null){
             head= new Node(data);
