@@ -7,7 +7,9 @@ public class leetCodeContest_30Days {
        //1st day
         //System.out.println(singleNumber(new int[]{4,1,2,1,2}));
         // 2nd day
-        System.out.println(isHappy(8));
+       // System.out.println(isHappy(8));
+        // 3rd day
+        System.out.println(maxSubArray(new int[]{-2}));
     }
 
     /////////////////////////////////////////////////////////////// 1st  day ///////////////////////////////////////////////////
@@ -91,6 +93,25 @@ public class leetCodeContest_30Days {
     }
 
     /////////////////////////////////////////////////////////////// 3rd  day ///////////////////////////////////////////////////
+
+    // Given an integer array nums, find the contiguous subarray (containing at least one number)
+    // which has the largest sum and return its sum.
+
+
+    public static int maxSubArray(int[] nums) {
+        int maxUntilHere = nums[0];
+        int currentMax = nums[0];
+        if(nums.length == 1 ){
+            return  nums[0];
+        }
+
+        for (int i = 1; i <nums.length ; i++) {
+            currentMax = Math.max(nums[i] , currentMax + nums[i]);
+            maxUntilHere = Math.max(currentMax , maxUntilHere);
+        }
+        return maxUntilHere ;
+    }
+
 
 
 
