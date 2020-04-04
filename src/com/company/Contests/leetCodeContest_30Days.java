@@ -9,7 +9,14 @@ public class leetCodeContest_30Days {
         // 2nd day
        // System.out.println(isHappy(8));
         // 3rd day
-        System.out.println(maxSubArray(new int[]{-2}));
+        //System.out.println(maxSubArray(new int[]{-2}));
+        // 4th day
+        /*int[] a = moveZeroes(new int[]{1,5,0,0,1,2,5,9});
+        for (int i = 0; i <a.length ; i++) {
+            System.out.print(a[i]+" ");
+        }*/
+        // 5th day
+
     }
 
     /////////////////////////////////////////////////////////////// 1st  day ///////////////////////////////////////////////////
@@ -112,7 +119,21 @@ public class leetCodeContest_30Days {
         return maxUntilHere ;
     }
 
+    /////////////////////////////////////////////////////////////// 4th  day ///////////////////////////////////////////////////
 
 
+    public static int[] moveZeroes(int[] nums) {
+        int pointer = 0 ;
+        for (int i = 0; i < nums.length; i++) {
+            if(nums[i] != 0 )
+                nums[pointer++] = nums[i];
+        }
+        while (pointer < nums.length)
+            nums[pointer++] = 0;
+
+        return nums;
+    }
+
+    /////////////////////////////////////////////////////////////// 5th  day ///////////////////////////////////////////////////
 
 }
