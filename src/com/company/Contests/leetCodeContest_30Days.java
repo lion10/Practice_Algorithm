@@ -16,6 +16,8 @@ public class leetCodeContest_30Days {
             System.out.print(a[i]+" ");
         }*/
         // 5th day
+        int[] temp =  {7,1,5,3,6,4};
+        System.out.println(maxProfit(temp));;
 
     }
 
@@ -135,5 +137,33 @@ public class leetCodeContest_30Days {
     }
 
     /////////////////////////////////////////////////////////////// 5th  day ///////////////////////////////////////////////////
+
+
+
+    /*
+    Say you have an array for which the ith element is the price of a given stock on day i.
+
+    Design an algorithm to find the maximum profit. You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times).
+
+    Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
+    */
+    public static int maxProfit(int[] prices) {
+        int maxProfit = 0 ;
+        int countPriceMoreThanDayBefore=0;
+        for (int i = 0; i <prices.length-1 ; i++) {
+            if(prices[i] <= prices[i+1]){
+                 maxProfit += (prices[i+1]-prices[i]);
+            } else {
+                countPriceMoreThanDayBefore++;
+            }
+        }
+
+        if(countPriceMoreThanDayBefore == prices.length - 1 )
+            return  0;
+        return maxProfit ;
+
+    }
+
+    /////////////////////////////////////////////////////////////// 6th  day ///////////////////////////////////////////////////
 
 }
