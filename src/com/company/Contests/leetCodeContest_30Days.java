@@ -1,5 +1,10 @@
 package com.company.Contests;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+
 public class leetCodeContest_30Days {
 
 
@@ -16,8 +21,14 @@ public class leetCodeContest_30Days {
             System.out.print(a[i]+" ");
         }*/
         // 5th day
-        int[] temp =  {7,1,5,3,6,4};
-        System.out.println(maxProfit(temp));;
+      /*  int[] temp =  {7,1,5,3,6,4};
+        System.out.println(maxProfit(temp));;*/
+
+      // 6th day
+        String[] strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
+        System.out.println(groupAnagrams(strs).toString());
+
+
 
     }
 
@@ -165,5 +176,42 @@ public class leetCodeContest_30Days {
     }
 
     /////////////////////////////////////////////////////////////// 6th  day ///////////////////////////////////////////////////
+
+
+     //  Given an array of strings, group anagrams together.
+
+    /*
+    *   Input: ["eat", "tea", "tan", "ate", "nat", "bat"],
+        Output:[
+                  ["ate","eat","tea"],
+                  ["nat","tan"],
+                  ["bat"]
+                ]
+    */
+
+    public static List<List<String>> groupAnagrams(String[] strs) {
+
+        List<List<String>> groupAnagrams = new ArrayList<>();
+        HashMap<String , List<String>>  map = new HashMap<>();
+
+        for (String str: strs) {
+            char[] tempCharArray =str.toCharArray();
+            Arrays.sort(tempCharArray);
+            String key = new String(tempCharArray);
+            if(map.containsKey(key)){
+                map.get(key).add(str); // to get key which key consider it as ArrayList so we add str
+        //        System.out.println(map.get(key));
+            }else{
+                List<String> stringList = new ArrayList<>();
+                stringList.add(str);
+                map.put(key,stringList);
+            }
+        }
+
+        groupAnagrams.addAll(map.values()); // map.values() === > stringList ArrayList;
+        return  groupAnagrams;
+    }
+
+    /////////////////////////////////////////////////////////////// 7th  day ///////////////////////////////////////////////////
 
 }
