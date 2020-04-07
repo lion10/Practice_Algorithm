@@ -1,9 +1,6 @@
 package com.company.Contests;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class leetCodeContest_30Days {
 
@@ -25,9 +22,11 @@ public class leetCodeContest_30Days {
         System.out.println(maxProfit(temp));;*/
 
       // 6th day
-        String[] strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
-        System.out.println(groupAnagrams(strs).toString());
+      /*  String[] strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
+        System.out.println(groupAnagrams(strs).toString());*/
 
+      // 7th day
+        System.out.println(countElements(new int[]{1,3,2,3,5,0}));
 
 
     }
@@ -213,5 +212,51 @@ public class leetCodeContest_30Days {
     }
 
     /////////////////////////////////////////////////////////////// 7th  day ///////////////////////////////////////////////////
+    /*
+    * Given an integer array arr, count element x such that x + 1 is also in arr.
+    * If there're duplicates in arr, count them seperately.
+        * */
+
+        /*    public static int countElements(int[] arr) {
+        int totalOfDuplicatesNumber = 0;
+        for (int i = 0; i <arr.length ; i++) {
+            if (binarySearch(arr,arr[i]+1) != -1){
+                totalOfDuplicatesNumber++;
+            }
+        }
+        return totalOfDuplicatesNumber;
+        }*/
+
+       /* public static int binarySearch(int arr[], int x) {
+            int l = 0, r = arr.length - 1;
+            while (l <= r) {
+                int m = l + (r - l) / 2;
+                if (arr[m] == x)
+                    return m;
+                if (arr[m] < x)
+                    l = m + 1;
+                else
+                    r = m - 1;
+            }
+            return -1;
+        }*/
+
+
+   // by hash set
+    public static int countElements(int[] arr) {
+        int totalOfDuplicatesNumber = 0;
+        Set<Integer> set= new HashSet<>();
+        for (int v: arr) {
+            set.add(v);
+        }
+        for (int i:arr) {
+            if(set.contains(i+1)){
+                totalOfDuplicatesNumber++;
+            }
+        }
+        return totalOfDuplicatesNumber ;
+    }
+
+
 
 }
