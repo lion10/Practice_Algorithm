@@ -2,7 +2,7 @@ package com.company.Contests;
 
 import java.util.*;
 
-public class leetCodeContest_30Days {
+public class Week_1_leetCodeContest_30Days {
 
 
     public static void main(String[] args) {
