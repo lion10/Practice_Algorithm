@@ -27,6 +27,17 @@ public class Week_2_leetCodeContest_30Days {
         */
 
 
+        //10th day :
+
+        Solution tree = new Solution();
+        tree.root = new TreeNode(1);
+        tree.root.left = new TreeNode(2);
+        tree.root.right = new TreeNode(3);
+        tree.root.left.left = new TreeNode(4);
+        tree.root.left.right = new TreeNode(5);
+
+        System.out.println("longest path = " + tree.diameterOfBinaryTree(tree.root));
+
     }
 
 
@@ -135,7 +146,50 @@ public class Week_2_leetCodeContest_30Days {
             return stack2.peek();
         }
     }
+    /** 10th day :
+    * Given a binary tree, you need to compute the length of the diameter of the tree.
+    * The diameter of a binary tree is the length of the longest path between any two nodes in a tree.
+    * This path may or may not pass through the root.
+    * */
+
+    /**
+     * Definition for a binary tree node.
+     * */
+    public static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) {
+            val = x;
+        }
+    }
+
+
+    static class Solution {
+        TreeNode root;
+        int max = 0 ;
+
+        public int diameterOfBinaryTree(TreeNode root) {
+                maxDepth(root);
+                return max;
+        }
+        public int maxDepth(TreeNode root){
+            if(root == null){
+                return 0;
+            }
+            int rightDepth = maxDepth(root.right);
+            int leftDepth = maxDepth(root.left);
+
+            max = Math.max (max , rightDepth + leftDepth);
+
+            return Math.max(rightDepth , leftDepth) + 1;
+        }
+    }
+
+
+    /** 11th day :**/
 
 
 }
+
 
