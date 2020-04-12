@@ -1,5 +1,7 @@
 package com.company.Contests;
 
+import java.util.Collections;
+import java.util.PriorityQueue;
 import java.util.Stack;
 
 public class Week_2_leetCodeContest_30Days {
@@ -29,14 +31,17 @@ public class Week_2_leetCodeContest_30Days {
 
         //10th day :
 
-        Solution tree = new Solution();
+       /* Solution tree = new Solution();
         tree.root = new TreeNode(1);
         tree.root.left = new TreeNode(2);
         tree.root.right = new TreeNode(3);
         tree.root.left.left = new TreeNode(4);
         tree.root.left.right = new TreeNode(5);
 
-        System.out.println("longest path = " + tree.diameterOfBinaryTree(tree.root));
+        System.out.println("longest path = " + tree.diameterOfBinaryTree(tree.root));*/
+
+        // 11th day :
+        System.out.println(lastStoneWeight(new int[]{2,7,4,1,8,1}));
 
     }
 
@@ -187,7 +192,32 @@ public class Week_2_leetCodeContest_30Days {
     }
 
 
-    /** 11th day :**/
+    /** 11th day :
+     * We have a collection of stones, each stone has a positive integer weight.
+     *
+     * Each turn, we choose the two heaviest stones and smash them together.  Suppose the stones have weights x and y with x <= y.  The result of this smash is:
+     *
+     * If x == y, both stones are totally destroyed;
+     * If x != y, the stone of weight x is totally destroyed, and the stone of weight y has new weight y-x.
+     * At the end, there is at most 1 stone left.  Return the weight of this stone (or 0 if there are no stones left.)
+     * **/
+    public static int lastStoneWeight(int[] stones) {
+        if(stones==null)
+            return 0;
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(Collections.reverseOrder());
+        for (int i = 0; i < stones.length; i++) {
+            priorityQueue.offer(stones[i]);
+        }
+        while (priorityQueue.size() > 1) {
+            int first = priorityQueue.poll();
+            int second = priorityQueue.poll();
+            if (first != second) {
+                int rem = Math.abs(first - second);
+                priorityQueue.offer(rem);
+            }
+        }
+        return priorityQueue.size()==1 ? priorityQueue.poll() : 0;
+    }
 
 
 }
