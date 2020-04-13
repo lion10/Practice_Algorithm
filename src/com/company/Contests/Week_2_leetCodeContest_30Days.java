@@ -1,8 +1,6 @@
 package com.company.Contests;
 
-import java.util.Collections;
-import java.util.PriorityQueue;
-import java.util.Stack;
+import java.util.*;
 
 public class Week_2_leetCodeContest_30Days {
 
@@ -41,8 +39,8 @@ public class Week_2_leetCodeContest_30Days {
         System.out.println("longest path = " + tree.diameterOfBinaryTree(tree.root));*/
 
         // 11th day :
-        System.out.println(lastStoneWeight(new int[]{2,7,4,1,8,1}));
-
+//        System.out.println(lastStoneWeight(new int[]{2,7,4,1,8,1}));
+        System.out.println(findMaxLength(new int[]{0,1,0}));
     }
 
 
@@ -220,6 +218,27 @@ public class Week_2_leetCodeContest_30Days {
     }
 
 
+/** 11th day
+*
+* Given a binary array, find the maximum length of a contiguous subarray with equal number of 0 and 1.
+
+ */
+    public static int findMaxLength(int[] nums) {
+
+                Map<Integer, Integer> map = new HashMap<>();
+                map.put(0, -1);
+                int maxLength = 0;
+                int  count = 0;
+                for (int i = 0; i < nums.length; i++) {
+                    count = count + (nums[i] == 1 ? 1 : -1);
+                    if (map.containsKey(count)) {
+                        maxLength = Math.max(maxLength, i - map.get(count));
+                    } else {
+                        map.put(count, i);
+                    }
+                }
+        return maxLength ;
+    }
 }
 
 
