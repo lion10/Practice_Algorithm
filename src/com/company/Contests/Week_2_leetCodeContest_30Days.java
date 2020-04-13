@@ -40,6 +40,8 @@ public class Week_2_leetCodeContest_30Days {
 
         // 11th day :
 //        System.out.println(lastStoneWeight(new int[]{2,7,4,1,8,1}));
+
+        // 12th day
         System.out.println(findMaxLength(new int[]{0,1,0}));
     }
 
