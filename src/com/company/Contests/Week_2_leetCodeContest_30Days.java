@@ -42,7 +42,19 @@ public class Week_2_leetCodeContest_30Days {
 //        System.out.println(lastStoneWeight(new int[]{2,7,4,1,8,1}));
 
         // 12th day
-        System.out.println(findMaxLength(new int[]{0,1,0}));
+   //     System.out.println(findMaxLength(new int[]{0,1,0}));
+
+
+        //13th day
+
+        System.out.println(shiftRight("omar",4));
+        System.out.println(shiftLeft("omar",4));
+        System.out.println(stringShift("abc",
+                new int[][]{{0,1},{1,2}}
+                ));
+
+
+
     }
 
 
@@ -220,7 +232,7 @@ public class Week_2_leetCodeContest_30Days {
     }
 
 
-/** 11th day
+/** 12th day
 *
 * Given a binary array, find the maximum length of a contiguous subarray with equal number of 0 and 1.
 
@@ -241,6 +253,63 @@ public class Week_2_leetCodeContest_30Days {
                 }
         return maxLength ;
     }
+
+
+    /** 13th day
+        *
+        * You are given a string s containing lowercase English letters, and a matrix shift, where shift[i] = [direction, amount]:
+        *
+        * direction can be 0 (for left shift) or 1 (for right shift).
+        * amount is the amount by which string s is to be shifted.
+        * A left shift by 1 means remove the first character of s and append it to the end.
+        * Similarly, a right shift by 1 means remove the last character of s and add it to the beginning.
+        * Return the final string after all operations.
+        */
+
+    public static String stringShift(String s, int[][] shift) {
+        int countShiftTimes = countTimeOfShiftRightAndLeft(shift);
+        String result;
+        if(countShiftTimes == 0){
+            result = s;
+        }else if(countShiftTimes > 0){
+               result = shiftLeft(s,countShiftTimes);
+        }else {
+            result = shiftRight(s,Math.abs(countShiftTimes));
+        }
+        return result;
+    }
+
+
+    public static int countTimeOfShiftRightAndLeft(int[][] shift){
+        int totalShiftLeft = 0 ;
+        for (int i = 0; i < shift.length ; i++) {
+            if(shift[i][0] == 0 ){
+                totalShiftLeft += shift[i][1];
+            }else if(shift[i][0] == 1) {
+                totalShiftLeft -= shift[i][1];
+            }
+        }
+      return totalShiftLeft;
+    }
+
+    public static String shiftRight(String s , int times) {
+        String temp = s;
+        for (int i = 0; i < times ; i++) {
+            temp =  temp.charAt(temp.length()-1)+temp.substring(0, temp.length()-1);
+        }
+        return temp;
+    }
+
+    public static String shiftLeft(String s ,int times) {
+        String temp = s;
+        for (int i = 0; i < times; i++) {
+          temp = temp.substring(1) + temp.charAt(0);
+        }
+        return temp;
+    }
+
+
+
 }
 
 
