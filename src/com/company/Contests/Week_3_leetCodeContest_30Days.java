@@ -3,6 +3,7 @@ package com.company.Contests;
 import javafx.util.Pair;
 
 import java.util.Arrays;
+import java.util.Scanner;
 import java.util.Stack;
 
 public class Week_3_leetCodeContest_30Days {
@@ -17,8 +18,28 @@ public class Week_3_leetCodeContest_30Days {
         */
 
         //15th day
-        System.out.println(checkValidString("(*))"));;
+       // System.out.println(checkValidString("(*))"));;
 
+
+        //16th day
+
+        Scanner scan=new Scanner(System.in);
+
+
+        char inputArray[][] = new char[4][5];
+
+        for (int i = 0; i < 4; i++) {
+            String data = "";
+            if (scan.hasNext()) { // input from user
+                data = scan.next();
+            } else {
+                break;
+            }
+            for (int j = 0; j < 5; j++)
+                inputArray[i][j] = data.charAt(j);
+        }
+
+        System.out.println(numIslands(inputArray));
 
     }
 
@@ -112,5 +133,44 @@ public class Week_3_leetCodeContest_30Days {
             leftPer = Math.max(leftPer, 0);
         }
         return leftPer == 0;
+    }
+
+    /** 16th day:
+     * Given a 2d grid map of '1's (land) and '0's (water), count the number of islands.
+     * An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.
+     * You may assume all four edges of the grid are all surrounded by wat*/
+
+    public static int numIslands(char[][] grid) {
+
+        int countOfIslands = 0 ;
+        for (int i = 0; i <grid.length ; i++) {
+            for (int j = 0; j <grid[i].length ; j++) {
+                if(grid[i][j] == '1'){
+                    DFS(grid,i,j);
+                    countOfIslands++;
+                }
+            }
+        }
+
+        return countOfIslands;
+
+    }
+
+    public static void DFS(char[][] grid , int row , int col){
+
+        if(grid[row][col] == '0')
+            return;
+
+        grid[row][col] = '0';
+         //   System.out.println("grid = " + Arrays.deepToString(grid) + ", row = " + row + ", col = " + col);
+        if(row+1 < grid.length)
+            DFS(grid,row+1,col);
+        if(row-1 >=0)
+            DFS(grid,row-1,col);
+        if(col+1 <grid[0].length)
+            DFS(grid,row,col+1);
+        if(col-1 >= 0)
+            DFS(grid,row,col-1);
+
     }
 }
