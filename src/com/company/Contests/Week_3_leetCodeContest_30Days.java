@@ -1,10 +1,6 @@
 package com.company.Contests;
 
-import javafx.util.Pair;
-
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Stack;
 
 public class Week_3_leetCodeContest_30Days {
 
@@ -23,7 +19,7 @@ public class Week_3_leetCodeContest_30Days {
 
         //16th day
 
-        Scanner scan=new Scanner(System.in);
+   /*     Scanner scan=new Scanner(System.in);
 
 
         char inputArray[][] = new char[4][5];
@@ -39,8 +35,14 @@ public class Week_3_leetCodeContest_30Days {
                 inputArray[i][j] = data.charAt(j);
         }
 
-        System.out.println(numIslands(inputArray));
+        System.out.println(numIslands(inputArray));*/
 
+        //17th day
+        int[][] num = {  {1,3,1},
+                        {1,5,1},
+                        {4,2,1}};
+
+        System.out.println(minPathSum(num));
     }
 
 
@@ -151,9 +153,7 @@ public class Week_3_leetCodeContest_30Days {
                 }
             }
         }
-
         return countOfIslands;
-
     }
 
     public static void DFS(char[][] grid , int row , int col){
@@ -171,6 +171,34 @@ public class Week_3_leetCodeContest_30Days {
             DFS(grid,row,col+1);
         if(col-1 >= 0)
             DFS(grid,row,col-1);
+    }
+
+    /** 17th day:
+     * Given a m x n grid filled with non-negative numbers,
+     *  find a path from top left to bottom right which minimizes the sum of all numbers along its path.
+     **/
+
+
+    // i solved it by dynamic programing approach technique
+
+    public static  int minPathSum(int[][] grid) {
+
+        if (grid.length == 0) return 0;
+
+        for (int row = 0; row <grid.length ; row++) {
+            for (int col = 0; col <grid[0].length; col++) {
+                if(row == 0 && col > 0 )
+                    grid[row][col] += grid[0][col-1];
+                else if(row > 0 && col == 0)
+                    grid[row][col] += grid[row-1][0];
+                else if(row > 0 && col > 0)
+                    grid[row][col] += Math.min(grid[row][col-1],grid[row-1][col] );
+            }
+        }
+
+        return  grid[grid.length-1][grid[0].length-1];
 
     }
+
+
 }
