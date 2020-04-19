@@ -1,9 +1,5 @@
-package com.company.LinkedList;
+package com.company.CrackingTheCodeInterview_Book.LinkedList;
 
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Hashtable;
 
 public class Node {
     int data ;

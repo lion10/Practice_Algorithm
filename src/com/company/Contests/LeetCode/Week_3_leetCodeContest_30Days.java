@@ -1,4 +1,4 @@
-package com.company.Contests;
+package com.company.Contests.LeetCode;
 
 import java.util.Scanner;
 

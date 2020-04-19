@@ -1,4 +1,4 @@
-package com.company.LinkedList;
+package com.company.CrackingTheCodeInterview_Book.LinkedList;
 
 import java.util.HashSet;
 

@@ -1,12 +1,10 @@
-package com.company.ArrayAndString;
+package com.company.CrackingTheCodeInterview_Book.ArrayAndString;
 
 import javafx.util.Pair;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import java.util.*;
 
-import static java.lang.Integer.max;
 import static java.lang.Integer.parseInt;
 
 public class CrackingTheCode_ArraysAndString {
