@@ -1,5 +1,6 @@
 package com.company.Contests.LeetCode;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Week_3_leetCodeContest_30Days {
@@ -38,11 +39,16 @@ public class Week_3_leetCodeContest_30Days {
         System.out.println(numIslands(inputArray));*/
 
         //17th day
-        int[][] num = {  {1,3,1},
+    /*    int[][] num = {  {1,3,1},
                         {1,5,1},
                         {4,2,1}};
 
-        System.out.println(minPathSum(num));
+        System.out.println(minPathSum(num));*/
+
+        //18th day
+        System.out.println(search(new int[]{4,5,6,7,0,1,2},10));
+
+
     }
 
 
@@ -181,7 +187,7 @@ public class Week_3_leetCodeContest_30Days {
 
     // i solved it by dynamic programing approach technique
 
-    public static  int minPathSum(int[][] grid) {
+    public static int minPathSum(int[][] grid) {
 
         if (grid.length == 0) return 0;
 
@@ -197,7 +203,26 @@ public class Week_3_leetCodeContest_30Days {
         }
 
         return  grid[grid.length-1][grid[0].length-1];
+    }
 
+
+    /** 18th day:
+     *   Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
+     *   (i.e., [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]).
+     *   You are given a target value to search. If found in the array return its index, otherwise return -1.
+     *   You may assume no duplicate exists in the array.
+     *   Your algorithm's runtime complexity must be in the order of O(log n).
+     **/
+
+
+    // in worst case it will take O(N)
+    public static int search(int[] nums, int target) {
+        int index ;
+        for ( index = 0; index < nums.length; index++) {
+            if(nums[index] == target)
+                break;
+        }
+        return (index >=0 && index <= nums.length-1 )? index : -1;
     }
 
 
