@@ -1,8 +1,5 @@
 package com.company.Contests.LeetCode;
 
-import java.util.Arrays;
-import java.util.Scanner;
-
 public class Week_3_leetCodeContest_30Days {
 
     public static void main(String[] args) {
@@ -46,7 +43,10 @@ public class Week_3_leetCodeContest_30Days {
         System.out.println(minPathSum(num));*/
 
         //18th day
-        System.out.println(search(new int[]{4,5,6,7,0,1,2},10));
+       // System.out.println(search(new int[]{4,5,6,7,0,1,2},10));
+
+        //19th day
+
 
 
     }
@@ -224,6 +224,49 @@ public class Week_3_leetCodeContest_30Days {
         }
         return (index >=0 && index <= nums.length-1 )? index : -1;
     }
+
+
+    /** 19th day:
+     Return the root node of a binary search tree that matches the given preorder traversal.
+     **/
+
+
+    static class Soltution {
+        int i =0;
+
+       public  class TreeNode {
+           int val;
+           TreeNode left;
+           TreeNode right;
+           TreeNode(int x) { val = x; }
+       }
+
+
+       public  TreeNode bstFromPreorder(int[] preorder) {
+
+           if(preorder == null || preorder.length == 0){
+               return null;
+           }
+
+           return dfs(preorder, Integer.MIN_VALUE, Integer.MAX_VALUE);
+       }
+
+       private TreeNode dfs(int[] preorder, int min, int max){
+           if( i>=preorder.length){
+               return null;
+           }
+
+           if(preorder[i]<min || preorder[i]>max){
+               return null;
+           }
+
+           TreeNode root = new TreeNode(preorder[i]);
+           i++;
+           root.left = dfs(preorder, min, root.val);
+           root.right = dfs(preorder, root.val, max);
+           return root;
+       }
+   }
 
 
 }
