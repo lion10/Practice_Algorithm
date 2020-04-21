@@ -1,5 +1,8 @@
 package com.company.Contests.LeetCode;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Week_3_leetCodeContest_30Days {
 
     public static void main(String[] args) {
@@ -47,7 +50,10 @@ public class Week_3_leetCodeContest_30Days {
 
         //19th day
 
-
+        //20th day
+        int[][] num = {
+                {0,0,0,1},{0,0,1,1},{0,1,1,1}};
+                System.out.println(leftMostColumnWithOne(num));
 
     }
 
@@ -267,6 +273,81 @@ public class Week_3_leetCodeContest_30Days {
            return root;
        }
    }
+
+
+
+
+
+
+    /** 20th day:
+                Leftmost Column with at Least a One
+     **/
+
+    /**
+     * // This is the BinaryMatrix's API interface.
+     * // You should not implement it, or speculate about its implementation
+     * interface BinaryMatrix {
+     *     public int get(int x, int y) {}
+     *     public List<Integer> dimensions {}
+     * };
+     */
+
+    // this solution will take o(n * m) where n # of rows and m # of cols for array as parameter
+    public static int leftMostColumnWithOne(int[][] binaryMatrix) {
+        int col;
+        int countOnesInCols= 0;
+        for ( col = 0; col <binaryMatrix[0].length ; col++) {
+            countOnesInCols = 0 ;
+
+            for (int row = 0; row < binaryMatrix.length ; row++) {
+                if(binaryMatrix[row][col] == 1){
+                    countOnesInCols++;
+                }
+            }
+            if(countOnesInCols == 1)
+                break;
+        }
+        return countOnesInCols == 1 ? col : -1;
+    }
+
+
+    // this solution will take o(m * log(n)) where m # of rows and n # of cols for when parameter as interface
+/*
+    class Solution {
+        int m , n ,leftMostColOne;
+        public int leftMostColumnWithOne(BinaryMatrix binaryMatrix) {
+            m = binaryMatrix.dimensions().get(0);
+            n = binaryMatrix.dimensions().get(1);
+            leftMostColOne = -1 ;
+            binarySearch(binaryMatrix, 0, n-1);
+            return leftMostColOne;
+        }
+
+        public void binarySearch(BinaryMatrix binaryMatrix, int start, int end){
+            if (start > end){
+                return;
+            }
+            int mid = start + (end - start / 2);
+            if(allZerosBefourMid(binaryMatrix, mid)){
+                binarySearch(binaryMatrix ,mid+1 , end);
+            }else{
+                leftMostColOne = mid;
+                binarySearch(binaryMatrix ,start , mid-1);
+            }
+        }
+
+        boolean allZerosBefourMid(BinaryMatrix binaryMatrix, int end){
+            for(int i =0 ; i < m ; i++){
+                if(binaryMatrix.get(i,end) == 1)
+                    return false ;
+            }
+            return true;
+        }
+
+
+    }*/
+
+
 
 
 }
