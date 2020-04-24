@@ -1,5 +1,9 @@
 package com.company.Contests.LeetCode;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class Week_4_leetCodeContest_30Days {
 
     public static void main(String[] args) {
@@ -50,6 +54,52 @@ public class Week_4_leetCodeContest_30Days {
         }
         return  n;
     }
+    /** 23th day:
+     Design and implement a data structure for Least Recently Used (LRU) cache. It should support
+     the following operations: get and put.
+     */
+
+    class LRUCache {
+
+        HashMap<Integer,Integer> map;
+        List<Integer> list;
+        int c;
+
+        public LRUCache(int capacity) {
+            c=capacity;
+            list=new ArrayList<>(capacity);
+            map=new HashMap<>();
+        }
+
+        public int get(int key) {
+            if(map.containsKey(key)){
+                int temp=list.indexOf(key);
+                list.remove(temp);
+                list.add(key);
+                return map.get(key);
+            }
+            return -1;
+
+        }
+
+        public void put(int key, int value) {
+            if(list.contains(key)){
+                map.put(key,value);
+                int temp=list.indexOf(key);
+                list.remove(temp);
+                list.add(key);
+            }else{
+                if(list.size()==c){
+                    int temp=list.get(0);
+                    map.remove(temp);
+                    list.remove(0);
+                }
+                list.add(key);
+                map.put(key,value);
+            }
+        }
+    }
+
 
 
 }
