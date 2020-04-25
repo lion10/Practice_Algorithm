@@ -11,8 +11,10 @@ public class Week_4_leetCodeContest_30Days {
         // System.out.println(subarraySum(new int[]{1,2,2},2));
 
         // 22th day:
-        System.out.println(rangeBitwiseAnd(5,7));
+        //System.out.println(rangeBitwiseAnd(5,7));
 
+        // 24th day:
+        System.out.println(canJump(new int[]{2,0}));
     }
 
 
@@ -101,5 +103,38 @@ public class Week_4_leetCodeContest_30Days {
     }
 
 
+    /** 24th day:
+     Given an array of non-negative integers, you are initially positioned at the first index of the array.
+     Each element in the array represents your maximum jump length at that position.
+     Determine if you are able to reach the last index.
+     */
+
+    public static boolean canJump(int[] nums) {
+      /*  int index = 1 ;
+        while (index < nums.length){
+            index += nums[index-1];
+            // System.out.println(index);
+            if(index > nums.length ){
+                return false;
+            }
+            if(index == nums.length ){
+                return true;
+            }
+            if(nums[index-1]==0 && index < nums.length )
+                return false;
+        }
+        return index == nums.length? true :false;
+        */
+
+        int index = 0 ;
+        for(int i=0;i<nums.length;i++) {
+            if(index < i)
+                return false;
+            if(i + nums[i] >= nums.length-1)
+                return true;
+            index= Math.max(index, i+nums[i]);
+        }
+        return index >= nums.length-1;
+    }
 
 }
