@@ -14,7 +14,11 @@ public class Week_4_leetCodeContest_30Days {
         //System.out.println(rangeBitwiseAnd(5,7));
 
         // 24th day:
-        System.out.println(canJump(new int[]{2,0}));
+       // System.out.println(canJump(new int[]{2,0}));
+
+
+        //25th day
+        System.out.println(longestCommonSubsequence("abc","abc"));
     }
 
 
@@ -135,6 +139,35 @@ public class Week_4_leetCodeContest_30Days {
             index= Math.max(index, i+nums[i]);
         }
         return index >= nums.length-1;
+    }
+
+
+    /** 25th day:
+     Given two strings text1 and text2, return the length of their longest common subsequence.
+     */
+
+    public static int longestCommonSubsequence(String text1, String text2) {
+        char[] x = text1.toCharArray();
+        char[] y= text2.toCharArray();
+        int n= text1.length();
+        int m =text2.length();
+
+        int[][] lcs = new int[n + 1][m + 1];
+
+        if(text1 == null || text2 == null)
+            return 0;
+
+        for (int i = 1; i <=n ; i++) {
+            for (int j = 1; j <= m; j++) {
+                if (x[i - 1] == y[j - 1]) {
+                    lcs[i][j] = 1 + lcs[i - 1][j - 1];
+                }else {
+                    lcs[i][j] =Math.max(lcs[i-1][j],lcs[i][j-1]);
+                }
+            }
+        }
+        return lcs[n][m];
+
     }
 
 }
