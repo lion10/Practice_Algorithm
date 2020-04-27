@@ -3,6 +3,7 @@ package com.company.Contests.LeetCode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 public class Week_4_leetCodeContest_30Days {
 
@@ -18,7 +19,25 @@ public class Week_4_leetCodeContest_30Days {
 
 
         //25th day
-        System.out.println(longestCommonSubsequence("abc","abc"));
+      //  System.out.println(longestCommonSubsequence("abc","abc"));
+
+
+        // 26th day
+        Scanner scan=new Scanner(System.in);
+        char inputArray[][] = new char[4][5];
+
+        for (int i = 0; i < 4; i++) {
+            String data = "";
+            if (scan.hasNext()) { // input from user
+                data = scan.next();
+            } else {
+                break;
+            }
+            for (int j = 0; j < 5; j++)
+                inputArray[i][j] = data.charAt(j);
+        }
+
+        System.out.println(maximalSquare(inputArray));
     }
 
 
@@ -167,6 +186,86 @@ public class Week_4_leetCodeContest_30Days {
             }
         }
         return lcs[n][m];
+
+    }
+
+
+    /**
+     * Given a 2D binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
+     * */
+    public static int maximalSquare(char[][] matrix) {
+//        int count = 0;
+//        int startWidth = 0;
+//        int startLength = 0;
+//        if(matrix[0].length == 1){
+//            for (int i = 0; i < matrix.length ; i++) {
+//                if (matrix[0][i] == '1')
+//                    return 1;
+//                else
+//                    return 0;
+//
+//            }
+//        }
+//        for (int i = 0; i <matrix.length-1 ; i++) {
+//            for (int j = 0; j <matrix[i].length-1; j++) {
+//                if(matrix[i][j] == '1' && matrix[i][j+1] == '1' ){
+//                    startWidth  += 2;
+//                    System.out.println("startWidth = " + startWidth);
+//                    if (matrix[i+1][j] == '1' && matrix[i+1][j+1] == '1'){
+//                        startLength += 2;
+//                        System.out.println("startLength = " + startLength);
+//                        if(startLength == startWidth)
+//                            count+=4;
+//                        else {
+//                            startWidth =0;
+//                            startLength =0;
+//                        }
+//                    }
+//                    if(i + 4 > matrix.length-1 || j + 4 > matrix[i].length-1) {
+//                        startWidth =0;
+//                        startLength =0;
+//                        break;
+//                    }
+//                }else{
+//                    startWidth =0;
+//                    startLength =0;
+//                }
+//            }
+//        }
+//        return count;
+
+
+        int rows = matrix.length, cols = rows > 0 ? matrix[0].length : 0;
+        int maxlen = 0;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (matrix[i][j] == '1') {
+                    int len = 1;
+                    boolean flag = true;
+                    while (len + i < rows && len + j < cols && flag) {
+                        for (int k = j; k <= len + j; k++) {
+                            if (matrix[i + len][k] == '0') {
+                                flag = false;
+                                break;
+                            }
+                        }
+                        for (int k = i; k <= len + i; k++) {
+                            if (matrix[k][j + len] == '0') {
+                                flag = false;
+                                break;
+                            }
+                        }
+                        if (flag)
+                            len++;
+                    }
+                    if (maxlen < len) {
+                        maxlen = len;
+                    }
+                }
+            }
+        }
+        return maxlen * maxlen;
+
 
     }
 
