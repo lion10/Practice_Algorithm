@@ -1,9 +1,6 @@
 package com.company.Contests.LeetCode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Week_4_leetCodeContest_30Days {
 
@@ -190,7 +187,7 @@ public class Week_4_leetCodeContest_30Days {
     }
 
 
-    /**
+    /** 26th day:
      * Given a 2D binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
      * */
     public static int maximalSquare(char[][] matrix) {
@@ -266,7 +263,91 @@ public class Week_4_leetCodeContest_30Days {
         }
         return maxlen * maxlen;
 
-
     }
 
+    /** 27th day:
+     * You have a queue of integers, you need to retrieve the first unique integer in the queue.
+     * * Implement the FirstUnique class:
+     * FirstUnique(int[] nums) Initializes the object with the numbers in the queue.
+     * int showFirstUnique() returns the value of the first unique integer of the queue, and returns -1 if there is no such integer.
+     * void add(int value) insert value to the queue.
+     * */
+
+    class FirstUnique {
+
+        /** 14/17 test cases accepted*/
+        /*
+        Queue<Integer> queue;
+        HashMap<Integer,Integer> hashMap;
+        public FirstUnique(int[] nums) {
+             queue =new LinkedList<>();
+             hashMap= new HashMap<>();
+            for (int a: nums) {
+                if(!hashMap.containsKey(a)){
+                    hashMap.put(a,1);
+                    queue.add(a);
+                }
+                else{
+                    queue.remove(a);
+                    hashMap.remove(a);
+                }
+            }
+        }
+
+        public int showFirstUnique() {
+            Iterator<Map.Entry<Integer, Integer>> iterator = hashMap.entrySet().iterator();
+            // flag to store result
+            int keyToBeChecked = 1;
+            boolean isKeyPresent = false;
+            // Iterate over the HashMap
+            while (iterator.hasNext()) {
+                // Get the entry at this iteration
+                Map.Entry<Integer, Integer> entry  = iterator.next();
+                // Check if this key is the required key
+                if (keyToBeChecked == entry.getKey()) {
+                    isKeyPresent = true;
+                }
+            }
+
+            return isKeyPresent? queue.peek():-1;
+        }
+
+        public void add(int value) {
+            queue.add(value);
+            if(!hashMap.containsKey(value)){
+                hashMap.put(value,1);
+                queue.add(value);
+            }
+            else{
+                hashMap.put(value,hashMap.get(value)+1);
+                queue.remove(value);
+            }
+        }*/
+
+
+        /** anther solution*/
+        HashSet<Integer> unique = new LinkedHashSet<>(),nonunique = new LinkedHashSet<>();
+        public FirstUnique(int[] nums) {
+            for (int num: nums) {
+                add(num);
+            }
+        }
+        public int showFirstUnique() {
+            try {
+                return unique.iterator().next();
+            }catch (NoSuchElementException e){
+                return -1;
+            }
+        }
+        public void add(int value) {
+            if(nonunique.contains(value)) return;
+            if(unique.contains(value)){
+                unique.remove(value);
+                nonunique.add(value);
+                return;
+            }
+            unique.add(value);
+        }
+
+    }
 }
