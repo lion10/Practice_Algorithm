@@ -44,7 +44,7 @@ import java.util.*;
                 Node p = inputNode.parent;
                 while(p != null && inputNode == p.right){
                     inputNode =p;
-                    p = p.parent;
+                    p = inputNode.parent;
                 }
 
                 return p;

@@ -326,7 +326,9 @@ public class Week_4_leetCodeContest_30Days {
 
 
         /** anther solution*/
-        HashSet<Integer> unique = new LinkedHashSet<>(),nonunique = new LinkedHashSet<>();
+        HashSet<Integer> unique = new LinkedHashSet<>(),
+                nonunique = new LinkedHashSet<>();
+
         public FirstUnique(int[] nums) {
             for (int num: nums) {
                 add(num);
