@@ -1,4 +1,4 @@
-package com.company.Contests.LeetCode;
+package com.company.Contests.LeetCode.Day_30_LeetCodingChallenge;
 
 import java.util.*;
 
