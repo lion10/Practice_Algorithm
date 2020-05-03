@@ -5,7 +5,10 @@ public class Week_1_LeetCodeContest_May_30Days {
     public static void main(String[] args) {
 
         //day 2
-        System.out.println(numJewelsInStones("aA","aAAbbbb"));
+        //System.out.println(numJewelsInStones("aA","aAAbbbb"));
+
+        //day 3
+        System.out.println(canConstruct("a", "b"));
 
 
     }
@@ -65,18 +68,77 @@ public class Week_1_LeetCodeContest_May_30Days {
 
     public static int numJewelsInStones(String J, String S) {
 
-        int count = 0;
+        /*
+                int count = 0;
 
-        for (int i = 0; i <J.length() ; i++) {
-            for (int j = 0; j < S.length() ; j++) {
-                if(J.charAt(i) == S.charAt(j))
-                    count++;
+                for (int i = 0; i <J.length() ; i++) {
+                    for (int j = 0; j < S.length() ; j++) {
+                        if(J.charAt(i) == S.charAt(j))
+                            count++;
+                    }
+                }
+
+                return count;
+        */
+
+
+        // optimize 1st solution
+        int count =0;
+        for(char c : S.toCharArray()){
+            if(J.indexOf(c) != -1){
+                count++;
             }
         }
-
         return count;
     }
 
 
+    // Day3
 
+    /**
+     * Given an arbitrary ransom note string and another string containing letters from all the magazines,
+     * write a function that will return true if the ransom note can be constructed from the magazines ; otherwise,
+     * it will return false.
+     * Each letter in the magazine string can only be used once in your ransom note.*/
+
+
+    public static boolean canConstruct(String ransomNote, String magazine) {
+        // pending solution
+    /*    if( (ransomNote.length() == 0 && magazine.length() == 0) || (ransomNote.length() == 0 && magazine.length() > 0))
+            return true;
+        if((ransomNote.length() > 0 && magazine.length() == 0))
+            return false;
+
+        int count = 0;
+        for (int i = 0; i <ransomNote.length() ; i++) {
+            for (char j: magazine.toCharArray()) {
+                if(ransomNote.charAt(i) == j){
+                    count++;
+                }else if(count == ransomNote.length()){
+                    return true;
+                }
+                else {
+                    count = 0;
+                }
+            }
+        }
+
+        return false;*/
+
+     // using string builder O(n)
+        StringBuilder stringBuilder = new StringBuilder().append(magazine);
+        int length = ransomNote.length();
+        int count = 0;
+        for(int i = 0 ; i < length ; i++){
+            int index = stringBuilder.indexOf(ransomNote.charAt(i)+"");
+            if(index != -1){
+                stringBuilder.delete(index, index+1);
+                count++;
+            }
+        }
+        if(count == length){
+            return true;
+        }
+        return false;
+    }
 }
