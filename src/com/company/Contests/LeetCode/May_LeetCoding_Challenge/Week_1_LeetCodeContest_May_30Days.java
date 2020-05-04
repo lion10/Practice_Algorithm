@@ -1,5 +1,8 @@
 package com.company.Contests.LeetCode.May_LeetCoding_Challenge;
 
+import javax.swing.*;
+
+
 public class Week_1_LeetCodeContest_May_30Days {
 
     public static void main(String[] args) {
@@ -8,8 +11,10 @@ public class Week_1_LeetCodeContest_May_30Days {
         //System.out.println(numJewelsInStones("aA","aAAbbbb"));
 
         //day 3
-        System.out.println(canConstruct("a", "b"));
+        //System.out.println(canConstruct("a", "b"));
 
+        //day 4
+        System.out.println(findComplement(10));
 
     }
     // Day1
@@ -140,5 +145,51 @@ public class Week_1_LeetCodeContest_May_30Days {
             return true;
         }
         return false;
+    }
+
+    // Day4
+
+    /**
+     *Given a positive integer, output its complement number. The complement strategy is to flip the bits of
+     * its binary representation.*/
+
+    public static int findComplement(int num) {
+
+
+        // time limited exceeded
+/*        String numToBinary = Integer.toBinaryString(num);
+        StringBuffer temp = new StringBuffer();
+        for (int i = 0; i <numToBinary.length() ; i++) {
+            if(numToBinary.charAt(i) == '1')
+                temp.append('0');
+            else
+                temp.append('1');
+        }
+        int binaryNumber   = Integer.parseInt(String.valueOf(temp));
+        int result =0 ;
+        int power = 0;
+        while (true){
+            if(binaryNumber  == 0 )
+                break;
+            else {
+                int test = binaryNumber %10;
+                result += test * Math.pow(2,power);
+                binaryNumber/=10;
+                power++;
+            }
+        }
+        return result;*/
+
+        if (num == 0 )
+            return 1;
+        if ((num & (num+1)) == 0)
+            return 0;
+
+        int log2 = 31- Integer.numberOfLeadingZeros(num);
+        long x = (long) (Math.pow(2, log2 + 1) - 1L);
+
+        return (int) (x-num);
+
+
     }
 }
