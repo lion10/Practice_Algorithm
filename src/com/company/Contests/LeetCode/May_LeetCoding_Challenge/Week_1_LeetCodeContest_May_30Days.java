@@ -185,11 +185,11 @@ public class Week_1_LeetCodeContest_May_30Days {
         if ((num & (num+1)) == 0)
             return 0;
 
-        int log2 = 31- Integer.numberOfLeadingZeros(num);
-        long x = (long) (Math.pow(2, log2 + 1) - 1L);
+        int log2 = 31 - Integer.numberOfLeadingZeros(num); // 32 -(leading zeros) == > 31 - (32 - 4) = 3
+        System.out.println("log2 = " + log2);
+        long x = (long) (Math.pow(2, log2 + 1) - 1L); // 16 -  1 = 15
+        System.out.println("x = " + x);
 
-        return (int) (x-num);
-
-
+        return (int) ( x - num );
     }
 }
