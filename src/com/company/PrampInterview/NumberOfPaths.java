@@ -12,7 +12,7 @@ public class NumberOfPaths {
      *  the number of the possible paths the driverless car can take.
     * */
 
-    static int[][] grid ;
+/*    static int[][] grid ;
 
     static int rowTraverse[] = {0,0,0,1};  // index 0 => left, 1 = > down, 2 => top , 3 => right
     static int colTraverse[] = {0,0,1,0};
@@ -58,7 +58,7 @@ public class NumberOfPaths {
     }
 
     static boolean isValid1(int row , int col ,int lengthRow ,int lengthCol){
-        if( row > lengthRow/2 || col> lengthCol/2 || row < 0 || col < 0 || row == col)
+        if( row > lengthRow/2 || col> lengthCol/2 || row < 0 || col < 0)
             return false;
         return true;
     }
@@ -83,12 +83,68 @@ public class NumberOfPaths {
 
 
 
-    public static boolean isValid(int row ,int col,int  ROW, int COL){
+    public static boolean isValid1(int row ,int col,int  ROW, int COL){
         if(row > ROW/2 || col> COL/2 || row < 0 || col <0 ){
             return false;
         }
         return true;
+    }*/
+
+
+    // not optimal solution => time limit exccededd
+    static int numOfPathsToDest1(int n) {
+
+        // your code goes here
+        int[][] memo = new int[n][n];
+        for(int i = 0 ;i < n ;i++){
+            for(int j = 0;j < n ; j++ ){
+                memo[i][j] = -1;
+            }
+        }
+        return numOfPathsToSquare(n-1,n-1,memo);
     }
+    static int numOfPathsToSquare(int i ,int j,int[][] memo){
+        if (i < 0 || j < 0)
+            return 0;
+        else if(i < j)
+            memo[i][j] = 0;
+        else if(i == 0 && j == 0)
+            memo[i][j] = 1;
+        else{
+            // (i , j-1) one step north
+            // (i-1 , j) one step east
+            memo[i][j] = numOfPathsToSquare(i,j-1,memo) +
+                    numOfPathsToSquare(i-1,j,memo);
+        }
+        return memo[i][j];
+
+    }
+
+
+
+    // best solution O(n^2), space complexity is reduced to O(n)
+    static int numOfPathsToDest2(int n) {
+        if (n == 1)
+            return 1;
+
+        int[] lastRow = new int[n];
+        for(int i=0; i < n ;i++)
+            lastRow[i] = 1; // base case - the first row is all ones
+
+
+        int[] currentRow = new int[n];
+        for (int j=1; j < n ;j++){
+            for (int i=j; i < n ;i++){
+                if (i == j)
+                    currentRow[i] = lastRow[i];
+                else
+                    currentRow[i] = currentRow[i-1] + lastRow[i];
+            }
+            lastRow = currentRow;
+        }
+        return currentRow[n-1];
+    }
+
 
     public static void main(String[] args) {
 
