@@ -1,6 +1,7 @@
 package com.company.Contests.LeetCode.May_LeetCoding_Challenge;
 
 import javax.swing.*;
+import java.util.HashMap;
 
 
 public class Week_1_LeetCodeContest_May_30Days {
@@ -14,7 +15,10 @@ public class Week_1_LeetCodeContest_May_30Days {
         //System.out.println(canConstruct("a", "b"));
 
         //day 4
-        System.out.println(findComplement(10));
+        //System.out.println(findComplement(10));
+
+        //day 5
+        System.out.println(firstUniqChar("loveleetcode"));
 
     }
     // Day1
@@ -154,8 +158,6 @@ public class Week_1_LeetCodeContest_May_30Days {
      * its binary representation.*/
 
     public static int findComplement(int num) {
-
-
         // time limited exceeded
 /*        String numToBinary = Integer.toBinaryString(num);
         StringBuffer temp = new StringBuffer();
@@ -192,4 +194,33 @@ public class Week_1_LeetCodeContest_May_30Days {
 
         return (int) ( x - num );
     }
+
+    public static int firstUniqChar(String s) {
+
+        if(s.length() == 0 ){
+            return -1;
+        }
+        HashMap<Character,Integer> hashMap =  new HashMap<>();
+        for (char charInString: s.toCharArray()) {
+            if(!hashMap.containsKey(charInString)){
+                hashMap.put(charInString,1);
+            }else {
+                hashMap.put(charInString,hashMap.get(charInString)+1);
+            }
+        }
+        // System.out.println("hashMap = " + hashMap);
+
+        int count = 0;
+        for (char charInString: s.toCharArray()) {
+            if(hashMap.get(charInString) == 1){
+                break;
+            }
+            count++;
+        }
+        return count == s.length() ? -1 : count;
+
+    }
+
+
+
 }
