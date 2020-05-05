@@ -47,8 +47,9 @@ public class Shortest_Cell_Path {
 
     // These arrays are used to get row and column
     // numbers of 4 neighbours of a given cell
-    static int rowNum[] = {-1, 0, 0, 1};
-    static int colNum[] = {0, -1, 1, 0};
+
+    static int rowNum[] = {-1, 0, 0, 1}; // indexes : 0 => left , 1 => down , 2 => top , 3 => right
+    static int colNum[] = {0, -1, 1, 0}; // indexes : 0 => left , 1 => down , 2 => top , 3 => right
 
     // function to find the shortest path between
     // a given source cell to a destination cell.
@@ -90,6 +91,7 @@ public class Shortest_Cell_Path {
             // its adjacent cells
             q.remove();
 
+            // indexes : 0 => left , 1 => down , 2 => top , 3 => right
             for (int i = 0; i < 4; i++)
             {
                 int row = pt.x + rowNum[i];
