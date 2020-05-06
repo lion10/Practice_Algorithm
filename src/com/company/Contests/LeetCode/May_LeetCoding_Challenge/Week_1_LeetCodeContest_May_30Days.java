@@ -18,7 +18,10 @@ public class Week_1_LeetCodeContest_May_30Days {
         //System.out.println(findComplement(10));
 
         //day 5
-        System.out.println(firstUniqChar("loveleetcode"));
+      //  System.out.println(firstUniqChar("loveleetcode"));
+
+        //day 6
+        System.out.println(majorityElement(new int[]{2,2,1,1,1,2,2}));
 
     }
     // Day1
@@ -195,6 +198,11 @@ public class Week_1_LeetCodeContest_May_30Days {
         return (int) ( x - num );
     }
 
+    // Day 5
+
+    /** Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1.
+     */
+
     public static int firstUniqChar(String s) {
 
         if(s.length() == 0 ){
@@ -219,6 +227,32 @@ public class Week_1_LeetCodeContest_May_30Days {
         }
         return count == s.length() ? -1 : count;
 
+    }
+
+
+    // Day 6
+
+    /**
+     * Given an array of size n, find the majority element. The majority element is the element that appears more than
+     * ⌊ n/2 ⌋ times.
+     * You may assume that the array is non-empty and the majority element always exist in the array.*/
+
+    public static int majorityElement(int[] nums) {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            int num = nums[i];
+            hashMap.put(num, hashMap.getOrDefault(num, 0) + 1);
+        }
+        int max = Integer.MIN_VALUE;
+        int result =0;
+        for (int  num: nums) {
+            if(hashMap.get(num) > max){
+                max = Math.max(max , hashMap.get(num) ) ;
+                result =num;
+            }
+        }
+        return result;
     }
 
 
