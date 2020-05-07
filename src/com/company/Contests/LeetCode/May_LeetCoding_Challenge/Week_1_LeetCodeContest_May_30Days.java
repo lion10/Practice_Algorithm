@@ -256,5 +256,88 @@ public class Week_1_LeetCodeContest_May_30Days {
     }
 
 
+    //day 7
+    /**
+     * In a binary tree, the root node is at depth 0, and children of each depth k node are at depth k+1.
+     * Two nodes of a binary tree are cousins if they have the same depth, but have different parents.
+     * We are given the root of a binary tree with unique values, and the values x and y of two different nodes in the tree.
+     * Return true if and only if the nodes corresponding to the values x and y are cousins.
+     **/
 
+    public class TreeNode {
+             int val;
+             TreeNode left;
+             TreeNode right;
+             TreeNode() {}
+             TreeNode(int val) { this.val = val; }
+             TreeNode(int val, TreeNode left, TreeNode right) {
+                 this.val = val;
+                 this.left = left;
+                 this.right = right;
+                }
+    }
+/**
+     public boolean isCousins(TreeNode root, int x, int y) {
+
+         TreeNode nodeX =  new TreeNode(x);
+         TreeNode nodeY =  new TreeNode(y);
+
+         return (level(root,nodeX ,1) == level(root,nodeY,1)) && (!isSibling(root,nodeX,nodeY));
+     }
+
+    private boolean isSibling(TreeNode root, TreeNode nodeX, TreeNode nodeY) {
+        if(root == null)
+            return false;
+        return (root.left == nodeX && root.right == nodeY) ||
+                (root.left == nodeY && root.right == nodeY) ||
+                isSibling(root.right,nodeX,nodeY)||
+                isSibling(root.left,nodeX,nodeY);
+    }
+
+    private int level(TreeNode root, TreeNode node, int level) {
+        if(root == null)
+            return 0 ;
+        if(root == node )
+            return level;
+
+        int lev = level(root.left,node,level+1);
+        if(lev != 0)
+            return lev;
+
+        return level(root.right,node,level+1);
+    }
+
+    */
+
+    class Pair{
+        TreeNode parent;
+        int level;
+
+        Pair(TreeNode parent, int level){
+            this.parent = parent;
+            this.level = level;
+        }
+    }
+
+    public boolean isCousins(TreeNode root, int x, int y) {
+        Pair pair1 = countLevel(root, x, null, 0);
+        Pair pair2 = countLevel(root, y, null, 0);
+        if(pair1.level == pair2.level && pair1.parent != pair2.parent){
+            return true;
+        }
+        return false;
+    }
+
+    Pair countLevel(TreeNode root, int val, TreeNode parent, int level){
+        if(root == null){
+            return null;
+        }
+        if(root.val == val){
+            return new Pair(parent, level);
+        }
+
+        Pair leftPair = countLevel(root.left, val, root, level + 1);
+        Pair rightPair = countLevel(root.right, val, root, level + 1);
+        return leftPair == null ? rightPair : leftPair;
+    }
 }
