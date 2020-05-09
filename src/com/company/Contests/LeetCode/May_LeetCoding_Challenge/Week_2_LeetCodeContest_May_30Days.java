@@ -5,7 +5,10 @@ public class Week_2_LeetCodeContest_May_30Days {
     public static void main(String[] args) {
 
         // Day 8
-        System.out.println(checkStraightLine(new int[][]{{1,1},{2,2},{3,3},{4,4},{5,5},{7,7}}));
+        // System.out.println(checkStraightLine(new int[][]{{1,1},{2,2},{3,3},{4,4},{5,5},{7,7}}));
+
+        // Day 9
+        System.out.println(isPerfectSquare(1));
     }
 
 
@@ -37,4 +40,21 @@ public class Week_2_LeetCodeContest_May_30Days {
             return 0;
         return (float) (p2[1] - p1[1]) / (p2[0] - p1[0]) ;
     }
+
+    // Day 9
+    /** Given a positive integer num, write a function which returns True if num is a perfect square else False.
+     Note: Do not use any built-in library function such as sqrt.
+     */
+    public static boolean isPerfectSquare(int num) {
+        if (num == 1)
+            return true;
+        for (int i = 1; i < num ; i++) {
+            if(i*i == num && i <= num/2)
+                return true;
+            if(i > num/2)
+                break;
+        }
+        return false;
+    }
+
 }
