@@ -11,7 +11,12 @@ public class Week_2_LeetCodeContest_May_30Days {
         // System.out.println(isPerfectSquare(1));
 
         // Day 10
-        System.out.println(findJudge(2,new int[][]{{1,2}}));
+        // System.out.println(findJudge(2,new int[][]{{1,2}}));
+
+        // Day 11
+        int[][] temp = floodFill(new int[][]{{1,1,1},{1,1,0},{1,0,1}},1,1,1);
+        System.out.println(temp);
+
     }
 
 
@@ -88,6 +93,37 @@ public class Week_2_LeetCodeContest_May_30Days {
                 return i;
         }
         return -1;
+    }
+
+    //Day 11
+
+     /**
+      * An image is represented by a 2-D array of integers, each integer representing the pixel value of the image (from 0 to 65535).
+      *
+      * Given a coordinate (sr, sc) representing the starting pixel (row and column) of the flood fill, and a pixel value newColor, "flood fill" the image.
+      *
+      * To perform a "flood fill", consider the starting pixel, plus any pixels connected 4-directionally to the starting pixel of the same color as the starting pixel, plus any pixels connected 4-directionally to those pixels (also with the same color as the starting pixel), and so on. Replace the color of all of the aforementioned pixels with the newColor.
+      *
+      * At the end, return the modified image.
+      **/
+    public static int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        int img = image[sr][sc];
+        if (img != newColor )
+            floodFill(image,sr,sc, img , newColor);
+        return image ;
+    }
+
+    private static void floodFill(int[][] image, int x , int y, int img, int newColor) {
+        if (x < 0 || y < 0 || x >= image.length || y >= image[0].length || image[x][y] == newColor)
+            return;
+
+        if (image[x][y] == img){
+            image[x][y] =newColor;
+            floodFill(image,x+1,y,img,newColor);
+            floodFill(image,x-1,y,img,newColor);
+            floodFill(image,x,y+1,img,newColor);
+            floodFill(image,x,y-1,img,newColor);
+        }
     }
 
 }
