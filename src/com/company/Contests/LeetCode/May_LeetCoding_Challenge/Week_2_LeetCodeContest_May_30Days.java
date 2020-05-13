@@ -18,7 +18,10 @@ public class Week_2_LeetCodeContest_May_30Days {
         System.out.println(temp);*/
 
         //Day 12
-        System.out.println(singleNonDuplicate(new int[]{1,2,2,3,3,3,5}));
+        // System.out.println(singleNonDuplicate(new int[]{1,2,2,3,3,3,5}));
+
+        //Day 13
+        System.out.println(removeKdigits("10222",1));
 
     }
 
@@ -158,5 +161,40 @@ public class Week_2_LeetCodeContest_May_30Days {
 
         return nums[left];
 
+    }
+
+    // day 13
+
+    /**
+     * Given a non-negative integer num represented as a string, remove k digits from the number
+     * so that the new number is the smallest possible.*/
+
+    public static String removeKdigits(String num, int k) {
+        if(num.length() == k)
+            return "0";
+        for (int i = 1; i <=k ; i++) {
+            num = removeOneDigit(num);
+        }
+        return num;
+
+    }
+
+    private static String removeOneDigit(String num) {
+        int len = num.length();
+        int index = len -1;
+        for (int i = 0; i <index; i++) {
+                if(num.charAt(i) > num.charAt(i+1)){
+                    index = i;
+                    break;
+                }
+        }
+        StringBuilder  st = new StringBuilder ();
+        for (int i = 0; i <len ; i++) {
+            char digit = num.charAt(i);
+            if(st.length() == 0 && digit == '0' || i == index)
+                continue;
+            st.append(digit);
+        }
+        return st.length() == 0? "0": st.toString();
     }
 }
