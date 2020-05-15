@@ -3,7 +3,7 @@ package com.company.Company_Challenge;
 
 import java.util.*;
 
-public class CarsInternChallenge {
+public class ZippityCarsChallenge {
     public static void main(String[] args) {
         System.out.println("hi");
     }
