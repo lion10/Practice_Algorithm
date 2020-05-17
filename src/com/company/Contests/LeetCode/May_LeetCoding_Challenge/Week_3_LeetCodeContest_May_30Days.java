@@ -1,12 +1,17 @@
 package com.company.Contests.LeetCode.May_LeetCoding_Challenge;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Week_3_LeetCodeContest_May_30Days {
 
     public static void main(String[] args) {
         // Day 15
-        System.out.println(maxSubarraySumCircular(new int[]{-2,-3,-1}));
+        // System.out.println(maxSubarraySumCircular(new int[]{-2,-3,-1}));
+
+        // Day 17
+        System.out.println(findAnagrams("cbaebabacd","abc"));
 
     }
 
@@ -87,7 +92,36 @@ public class Week_3_LeetCodeContest_May_30Days {
                 last.next = null;
             }
             return head;
-
         }
+    }
+
+    //Day 17 solved it by sliding window technique
+
+    /**
+     Given a string s and a non-empty string p, find all the start indices of p's anagrams in s.
+     Strings consists of lowercase English letters only and the length of both strings s and p will not be larger than 20,100.
+     The order of output does not matter.
+     */
+
+    public static List<Integer> findAnagrams(String s, String p) {
+        int[] letters = new int[26];
+        for (int i = 0; i < p.length(); i++) {
+            letters[p.charAt(i) - 'a']++;
+            // System.out.println("letters = " + letters[i]);
+        }
+        int j = 0;
+        int lengthP = p.length();
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < s.length(); i++) {
+            while (j < s.length() && j - i < p.length()){
+                if(letters[s.charAt(j++) - 'a']-- > 0)
+                    lengthP--;
+            }
+            if(lengthP == 0 && j - i == p.length())
+                list.add(i);
+            if(letters[s.charAt(i) - 'a']++ >= 0)
+                lengthP++;
+        }
+        return list;
     }
 }
