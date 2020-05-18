@@ -4,12 +4,20 @@ import java.util.*;
 
 public class RecruitingCodingChallenge {
     public static void main(String[] args) {
+
         System.out.println("hi all ");
+        List<Integer> test = new ArrayList<>();
+        test.add(5);
+        test.add(10);
+        test.add(80);
+        int a = finalInstance(1,test);
+        System.out.println(a);
     }
 
 
     // 1st question
         public static int finalInstance(int instances, List<Integer> averageUtil){
+            // 7/15 cases passed
 
             if(averageUtil.size() == 0 || averageUtil == null || instances == 0)
                 return 0;
@@ -29,6 +37,30 @@ public class RecruitingCodingChallenge {
                 time = time + 1;
             }
             return instances;
+
+            // 6/15 cases passed
+            /*if(averageUtil.size() == 0 || averageUtil == null || instances == 0)
+                return 0;
+            int time = 0;
+            while(time < averageUtil.size()){
+                int averageUtilization = averageUtil.get(time);
+                if(averageUtilization > 60 ){
+                    instances = instances * 2;
+                    if(instances <= 2e8){
+                        time = time + 10;
+                    }
+                } else if(averageUtilization < 25){
+                    instances = (int) Math.ceil(instances / 2);
+                    if( instances >= 1){
+                        time = time + 10;
+                    }
+                } else if (averageUtilization >= 25 && averageUtilization <= 60){
+                    time = time + 1;
+                    continue;
+                }
+                time = time + 1;
+            }
+            return instances;*/
         }
 
         // 2nd question

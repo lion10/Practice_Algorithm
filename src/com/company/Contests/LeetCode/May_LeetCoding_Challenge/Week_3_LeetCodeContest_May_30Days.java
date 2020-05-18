@@ -11,7 +11,10 @@ public class Week_3_LeetCodeContest_May_30Days {
         // System.out.println(maxSubarraySumCircular(new int[]{-2,-3,-1}));
 
         // Day 17
-        System.out.println(findAnagrams("cbaebabacd","abc"));
+        // System.out.println(findAnagrams("cbaebabacd","abc"));
+
+        // Day 18
+        System.out.println(checkInclusion("ab","eidbaooo"));
 
     }
 
@@ -124,4 +127,33 @@ public class Week_3_LeetCodeContest_May_30Days {
         }
         return list;
     }
+
+    // Day 18 i solved this problem  the same as above just i will return true if it matches otherwise it will return false
+
+    /**
+     * Given two strings s1 and s2, write a function to return true if s2 contains the permutation of s1.
+     * In other words, one of the first string's permutations is the substring of the second string.
+     * */
+
+    public static boolean checkInclusion(String s1, String s2) {
+        int[] letters = new int[26];
+        for (int i = 0; i < s1.length(); i++) {
+            letters[s1.charAt(i) - 'a']++;
+            // System.out.println("letters = " + letters[i]);
+        }
+        int j = 0;
+        int lengthS1 = s1.length();
+        for (int i = 0; i < s2.length(); i++) {
+            while (j < s2.length() && j - i < s1.length()){
+                if(letters[s2.charAt(j++) - 'a']-- > 0)
+                    lengthS1--;
+            }
+            if(lengthS1 == 0 && j - i == s1.length())
+                return true;
+            if(letters[s2.charAt(i) - 'a']++ >= 0)
+                lengthS1++;
+        }
+        return false;
+    }
+
 }
