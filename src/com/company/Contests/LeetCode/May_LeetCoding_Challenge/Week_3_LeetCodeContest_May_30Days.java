@@ -182,4 +182,36 @@ public class Week_3_LeetCodeContest_May_30Days {
         }
     }
 
+    public class TreeNode {
+         int val;
+         TreeNode left;
+         TreeNode right;
+         TreeNode() {}
+         TreeNode(int val) { this.val = val; }
+         TreeNode(int val, TreeNode left, TreeNode right) {
+             this.val = val;
+             this.left = left;
+             this.right = right;
+         }
+    }
+
+    // Day 20
+    /**Given a binary search tree, write a function kthSmallest to find the kth smallest element in it.*/
+    int answer, count;
+    public void inorder(TreeNode root, int k){
+        if(root == null) return ;
+        inorder(root.left, k);
+        count++;
+        if(count == k){
+            answer = root.val;
+            return ;
+        }
+        inorder(root.right, k);
+    }
+    public int kthSmallest(TreeNode root, int k) {
+        answer = 0;
+        inorder(root, k);
+        return answer;
+    }
+
 }
