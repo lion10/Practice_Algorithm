@@ -45,5 +45,37 @@ public class Week_4_LeetCodeContest_May_30Days {
         return temp.toString();
     }
 
+    // Day 23
+    /** Given two lists of closed intervals, each list of intervals is pairwise disjoint
+     *  and in sorted order.
+        Return the intersection of these two interval lists.*/
+
+    public int[][] intervalIntersection(int[][] A, int[][] B) {
+        int i = 0, j = 0;
+        ArrayList<int[]> result = new ArrayList<>();
+
+        while(i < A.length && j < B.length){
+
+            int l1 = Math.max(A[i][0], B[j][0]);
+            int l2 = Math.min(A[i][1], B[j][1]);
+
+            if(A[i][1] < B[j][0] || B[j][1] < A[i][0]){
+                l1 = 0;
+                l2 = 0;
+            }
+
+            if(l1 != 0 || l2 != 0)
+                result.add(new int[]{l1, l2});
+
+            if(A[i][1] < B[j][1])
+                i++;
+
+            else
+                j++;
+
+        }
+        return result.toArray(new int[result.size()][]);
+    }
+
 
 }
