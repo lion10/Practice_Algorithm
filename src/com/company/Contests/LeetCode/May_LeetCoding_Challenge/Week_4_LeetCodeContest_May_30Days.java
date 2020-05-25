@@ -77,5 +77,43 @@ public class Week_4_LeetCodeContest_May_30Days {
         return result.toArray(new int[result.size()][]);
     }
 
+     //Day 24
+
+    /**  Construct Binary Search Tree from Preorder Traversal*/
+     public class TreeNode {
+     int val;
+     TreeNode left;
+     TreeNode right;
+     TreeNode(int x) { val = x; }
+    }
+
+    class Solution {
+        int i = 0;
+        public TreeNode bstFromPreorder(int[] preorder) {
+
+            if(preorder == null || preorder.length == 0){
+                return null;
+            }
+
+            return dfs(preorder, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        }
+
+        private TreeNode dfs(int[] preorder, int min, int max){
+            if( i>=preorder.length){
+                return null;
+            }
+
+            if(preorder[i]<min || preorder[i]>max){
+                return null;
+            }
+
+            TreeNode root = new TreeNode(preorder[i]);
+            i++;
+            root.left = dfs(preorder, min, root.val);
+            root.right = dfs(preorder, root.val, max);
+            return root;
+        }
+    }
+
 
 }
