@@ -113,7 +113,64 @@ public class Week_4_LeetCodeContest_May_30Days {
             root.right = dfs(preorder, root.val, max);
             return root;
         }
+
+
     }
 
+    /** We write the integers of A and B (in the order they are given) on two separate horizontal lines.
+
+     Now, we may draw connecting lines: a straight line connecting two numbers A[i] and B[j] such that:
+
+     A[i] == B[j];
+     The line we draw does not intersect any other connecting (non-horizontal) line.
+     Note that a connecting lines cannot intersect even at the endpoints: each number can only belong to one connecting line.
+
+     Return the maximum number of connecting lines we can draw in this way.*/
+
+
+    public static int maxUncrossedLines(int[] A, int[] B) {
+        return crossedLine(A, B, 0, 0);
+    }
+    // time limited exceeded
+    public static int crossedLine(int[] A, int[] B, int i, int j){
+        if(i == A.length || j == B.length){
+            return 0;
+        }
+
+        if(A[i] == B[j]){
+            return 1 + crossedLine(A, B, i + 1, j + 1);
+        }
+        else{
+            return Math.max(crossedLine(A, B, i + 1, j),  crossedLine(A, B, i, j + 1));
+        }
+    }
+
+    public static int maxUncrossedLines1(int[] A, int[] B) {
+        int[][] dp = new int[A.length][B.length];
+        for(int i = 0; i < A.length; i++){
+            for(int j = 0; j < B.length; j++){
+                dp[i][j] = -1;
+            }
+        }
+
+        return crossedLine1(A, B, 0, 0, dp);
+    }
+
+
+    public static int crossedLine1(int[] A, int[] B, int i, int j, int[][] dp){
+        if(i == A.length || j == B.length){
+            return 0;
+        }
+        if(dp[i][j] != -1){
+            return dp[i][j];
+        }
+
+        if(A[i] == B[j]){
+            return dp[i][j] = 1 + crossedLine1(A, B, i + 1, j + 1, dp);
+        }
+        else{
+            return dp[i][j] = Math.max(crossedLine1(A, B, i + 1, j, dp), crossedLine1(A, B, i, j + 1, dp));
+        }
+    }
 
 }
