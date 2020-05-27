@@ -77,7 +77,7 @@ public class Week_4_LeetCodeContest_May_30Days {
         return result.toArray(new int[result.size()][]);
     }
 
-     //Day 24
+     //Day 24 Previously completed in: 30-Day LeetCoding Challeng
 
     /**  Construct Binary Search Tree from Preorder Traversal*/
      public class TreeNode {
@@ -171,6 +171,24 @@ public class Week_4_LeetCodeContest_May_30Days {
         else{
             return dp[i][j] = Math.max(crossedLine1(A, B, i + 1, j, dp), crossedLine1(A, B, i, j + 1, dp));
         }
+    }
+
+    // Day 26 Previously completed in: 30-Day LeetCoding Challenge
+    /** Given a binary array, find the maximum length of a contiguous subarray with equal number of 0 and 1.*/
+    public int findMaxLength(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, -1);
+        int maxLength = 0;
+        int  count = 0;
+        for (int i = 0; i < nums.length; i++) {
+            count = count + (nums[i] == 1 ? 1 : -1);
+            if (map.containsKey(count)) {
+                maxLength = Math.max(maxLength, i - map.get(count));
+            } else {
+                map.put(count, i);
+            }
+        }
+        return maxLength ;
     }
 
 }
