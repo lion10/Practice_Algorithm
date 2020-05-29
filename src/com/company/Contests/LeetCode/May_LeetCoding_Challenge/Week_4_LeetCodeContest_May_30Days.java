@@ -7,7 +7,12 @@ public class Week_4_LeetCodeContest_May_30Days {
 
     public static void main(String[] args) {
         //Day 22
-        System.out.println(frequencySort("tree"));
+        // System.out.println(frequencySort("tree"));
+
+        //Day 28
+        for (int i: countBits(5)) {
+            System.out.print(i +" ");
+        }
     }
 
 
@@ -234,5 +239,43 @@ public class Week_4_LeetCodeContest_May_30Days {
         }
         return true;
     }
+
+    // Day 28
+
+    /** Given a non negative integer number num. For every numbers
+     * i in the range 0 ≤ i ≤ num calculate the number of 1's in their binary
+     * representation and return them as an array.*/
+
+    //it takes o (n^2)
+    public static int[] countBits(int num) {
+        int[] result = new int[num+1];
+
+        for (int i = 0; i <= num ; i++) {
+           // result[i] = Integer.parseInt(Integer.toBinaryString(i));
+            result[i] = countOnes(i);
+        }
+        return result;
+    }
+    static int  countOnes (int n) {
+        int count=0;
+        while (n != 0) {
+            n = n & (n-1);
+            count++;
+        }
+        return count;
+    }
+
+    // 2nd sol: it takes o(n)
+    public int[] countBits1(int num) {
+
+        int count[]=new int[num+1];
+        for(int i=1;i<=num;i++)
+        {
+            count[i]=count[i/2]+(i%2);
+        }
+        return count;
+
+    }
+
 
 }
