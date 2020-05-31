@@ -71,4 +71,9 @@ public class Week_5_LeetCodeContest_May_30Days {
     public static int calculateDistance(int[] point) {
         return point[0] * point[0] + point[1] * point[1];
     }
+
+
+    // Day 31
+
+
 }

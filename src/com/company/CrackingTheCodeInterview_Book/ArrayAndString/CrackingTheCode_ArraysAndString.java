@@ -293,11 +293,34 @@ public class CrackingTheCode_ArraysAndString {
         return  true ;
     }
 
+    // Day 31
+    /**
+     * Given two words word1 and word2, find the minimum number of operations required to convert word1 to word2.
+     *
+     * You have the following 3 operations permitted on a word:
+     *
+     * Insert a character
+     * Delete a character
+     * Replace a character*/
 
+    public int minDistance(String word1, String word2) {
+        int[] result = new int[word2.length() + 1];
+        for (int i = 0; i <= word2.length(); ++i)
+            result[i] = i;
 
+        for (int i = 1; i <= word1.length(); ++i) {
+            int prev = result[0];
+            result[0] = i;
+            for (int j = 1; j <= word2.length(); ++j) {
+                int tmp = result[j];
+                result[j] = Math.min(result[j - 1], result[j]) + 1;
+                result[j] = Math.min(result[j], prev + (word1.charAt(i -1) == word2.charAt(j - 1) ? 0: 1));
+                prev = tmp;
+            }
+        }
 
-
-
+        return result[word2.length()];
+    }
 
 
 }
