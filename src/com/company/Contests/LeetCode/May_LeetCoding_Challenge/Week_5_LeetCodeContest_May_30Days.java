@@ -1,5 +1,6 @@
 package com.company.Contests.LeetCode.May_LeetCoding_Challenge;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,5 +46,29 @@ public class Week_5_LeetCodeContest_May_30Days {
 
         explored[course] = true;
         return false;
+    }
+
+    // Day 30
+    public static int[][] kClosest(int[][] points, int K) {
+
+        int[] distance = new int[points.length];
+        for(int i = 0; i < points.length; i++)
+            distance[i] = calculateDistance(points[i]);
+
+        Arrays.sort(distance);
+        int kthDistance = distance[K - 1];
+        int[][] kClosestPoints = new int[K][2];
+
+        for(int i = 0, j = 0; i < points.length && j < K; i++)
+            if(calculateDistance(points[i]) <= kthDistance)
+                kClosestPoints[j++] = points[i];
+
+        return kClosestPoints;
+
+    }
+
+
+    public static int calculateDistance(int[] point) {
+        return point[0] * point[0] + point[1] * point[1];
     }
 }
