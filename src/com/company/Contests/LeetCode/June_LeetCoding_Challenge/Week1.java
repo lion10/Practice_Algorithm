@@ -1,5 +1,7 @@
 package com.company.Contests.LeetCode.June_LeetCoding_Challenge;
 
+import java.util.Arrays;
+
 public class Week1 {
 
     public static void main(String[] args) {
@@ -48,6 +50,22 @@ public class Week1 {
         node.next = node.next.next;
     }
 
+    // Day 3
+    /** There are 2N people a company is planning to interview. The cost of flying the i-th person to city
+     * A is costs[i][0], and the cost of flying the i-th person to city B is costs[i][1].
+     Return the minimum cost to fly every person to a city such that exactly N people arrive in each city.*/
+
+    public int twoCitySchedCost(int[][] costs) {
+        Arrays.sort(costs, (a, b)->
+                Integer.compare(a[0]-a[1], b[0]-b[1])
+        );
+        int result = 0;
+        for(int i = 0; i < costs.length; i++)
+            result += costs[i][i < costs.length/2 ? 0 : 1];
+
+        return result;
+
+    }
 
 
 }
