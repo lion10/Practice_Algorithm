@@ -86,5 +86,30 @@ public class Week1 {
         s[j] = c;
     }
 
+    //Day 5
+    /**Given an array w of positive integers, where w[i] describes the weight of index i,
+     * write a function pickIndex which randomly picks an index in proportion to its weight.*/
+
+    class Solution {
+
+        private double[] probabilities;
+        public Solution(int[] w) {
+            double sum = 0;
+            this.probabilities = new double[w.length];
+            for(int weight : w)
+                sum += weight;
+            for(int i = 0; i < w.length; i++){
+                w[i] += (i == 0) ? 0 : w[i - 1];
+                probabilities[i] = w[i]/sum;
+            }
+        }
+
+        public int pickIndex() {
+            return Math.abs(Arrays.binarySearch(this.probabilities, Math.random())) - 1;
+        }
+
+
+    }
 
 }
+
