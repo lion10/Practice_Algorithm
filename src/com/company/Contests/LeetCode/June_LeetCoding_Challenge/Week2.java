@@ -24,4 +24,29 @@ public class Week2 {
         return (n>0 && ((n & (n-1)) == 0));
     }
 
+
+
+
+    // Day 9
+    /** Given a string s and a string t, check if s is subsequence of t.
+     A subsequence of a string is a new string which is formed from the original string by deleting some
+     (can be none) of the characters without disturbing the relative positions of the remaining characters.4
+     (ie, "ace" is a subsequence of "abcde" while "aec" is not).*/
+    public boolean isSubsequence(String s, String t) {
+        if(t.length() < s.length())
+            return false;
+        int prev = 0;
+        for(int i = 0; i < s.length();i++)
+        {
+            char tempChar = s.charAt(i);
+            prev = t.indexOf(tempChar,prev);
+            if(prev == -1)
+                return false;
+            prev++;
+        }
+        return true;
+
+    }
+
+
 }
