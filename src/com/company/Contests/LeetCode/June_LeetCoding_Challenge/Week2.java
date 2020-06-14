@@ -145,4 +145,58 @@ public class Week2 {
         }
     }
 
+
+
+    // Day 13
+    /**Given a set of distinct positive integers, find the largest subset such that every pair (Si, Sj)
+     * of elements in this subset satisfies:
+     * Si % Sj = 0 or Sj % Si = 0.
+     * If there are multiple solutions, return any subset is fin'e.*/
+
+
+    public List<Integer> largestDivisibleSubset(int[] nums) {
+        if(nums.length == 0)
+            return new ArrayList<Integer>();
+        Arrays.sort(nums);
+        int maxIndex = 0, maxLength = 1;
+        //used to remember the parent index of current index, parent index will be updated for each loop
+        int[] index = new int[nums.length];
+        int[]  result= new int[nums.length];
+
+        result[0] = 1;
+        for(int i = 0; i < nums.length - 1; i++){
+            for(int j = i + 1; j < nums.length; j++){
+                // if it is can be divided
+                if(nums[j] % nums[i] == 0){
+                    //compare the previous one and the current one to check the longest path
+                    if(result[i] >= result[j]){
+                        result[j] = result[i] + 1;
+                        index[j] = i;
+                    }
+                    // update max length and max index
+                    if(result[j] > maxLength){
+                        maxLength = result[j];
+                        maxIndex = j;
+                    }
+                }
+                else{
+                    // it is not in result array, set it 1
+                    if(result[j] == 0){
+                        index[j] = j;
+                        result[j] = 1;
+                    }
+                }
+            }
+        }
+        //return
+        LinkedList<Integer> list = new LinkedList<>();
+        while(maxIndex != index[maxIndex]){
+            list.addFirst(nums[maxIndex]);
+            maxIndex = index[maxIndex];
+        }
+        list.addFirst(nums[maxIndex]);
+        return list;
+
+    }
+
 }
