@@ -228,4 +228,13 @@ public class Week2 {
         return dist[dst] == Integer.MAX_VALUE ? -1 : dist[dst];
 
     }
+
+    // Day 15
+    /** Given the root node of a binary search tree (BST) and a value. You need to find the node in the BST
+     *  that the node's value equals the given value. Return the subtree rooted with that node.
+     *  If such node doesn't exist, you should return NULL.*/
+    public Week1.TreeNode searchBST(Week1.TreeNode root, int val) {
+        return (root == null || root.val == val) ? root :
+                ((root.val > val) ? searchBST(root.left, val) : searchBST(root.right, val));
+    }
 }
