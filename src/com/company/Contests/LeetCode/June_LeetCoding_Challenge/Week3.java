@@ -79,7 +79,7 @@ public class Week3 {
         return result;
     }
 
-    //Day 17
+    //Day 17 Surrounded Regions
 
     /** Given a 2D board containing 'X' and 'O' (the letter O), capture all regions surrounded by 'X'.
 
@@ -147,5 +147,25 @@ public class Week3 {
 
 
 
+
+    //Day 18  H-Index II
+
+    /** Given an array of citations sorted in ascending order (each citation is a non-negative integer) of a researcher, write a function to compute the researcher's h-index.
+     According to the definition of h-index on Wikipedia: "A scientist has index h if h of his/her N papers have at least h citations each, and the other N − h
+     papers have no more than h citations each." */
+
+    public int hIndex(int[] citations) {
+
+        if(citations == null || citations.length == 0)
+            return 0;
+        int n = citations.length;
+        int i = n - 1;
+        while( i >= 0 ) {
+            if(citations[i] < n - i)
+                break;
+            i--;
+        }
+        return n - i - 1;
+    }
 
 }
