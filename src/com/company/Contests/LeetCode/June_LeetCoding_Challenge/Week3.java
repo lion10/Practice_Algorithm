@@ -1,6 +1,8 @@
 package com.company.Contests.LeetCode.June_LeetCoding_Challenge;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class Week3 {
@@ -227,6 +229,46 @@ public class Week3 {
         }
 
         return null;
+    }
+
+
+    // Day 20 Permutation Sequence
+
+    /** The set [1,2,3,...,n] contains a total of n! unique permutations.
+     By listing and labeling all of the permutations in order, we get the following sequence for n = 3:
+     "123"
+     "132"
+     "213"
+     "231"
+     "312"
+     "321"
+     Given n and k, return the kth permutation sequence.*/
+
+    public String getPermutation(int n, int k) {
+
+        List<Integer> numList = new LinkedList<>();
+        // create the array of ints between 1 and n
+        for (int i = 1; i <= n; i++)
+            numList.add(i);
+
+        // calculate factorial of the array numbers
+        int[] factorial = new int[n];
+        factorial[0] = 1;
+        for (int i = 1; i < n; i++)
+            factorial[i] = i * factorial[i-1];
+
+        // find the permutations
+        k = k-1;
+        StringBuilder permutation = new StringBuilder();
+        for (int i = n; i > 0; i--){
+            int index = k / factorial[i-1]; // index of current number
+            k = k % factorial[i-1]; //the index for the remaining n-1 numbers
+            permutation.append(numList.get(index));
+            numList.remove(index);
+        }
+
+        return permutation.toString();
+
     }
 
 
