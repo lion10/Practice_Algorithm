@@ -29,4 +29,33 @@ public class Week4 {
         return 0;
     }
 
+
+
+ //  Day 23 Count Complete Tree Nodes
+    /** Given a complete binary tree, count the number of nodes.*/
+    public class TreeNode {
+         int val;
+         TreeNode left;
+         TreeNode right;
+         TreeNode() {}
+         TreeNode(int val) { this.val = val; }
+         TreeNode(int val, TreeNode left, TreeNode right) {
+             this.val = val;
+             this.left = left;
+             this.right = right;
+         }
+    }
+
+
+     public int countNodes(TreeNode root) {
+          if(root==null)
+              return 0;
+          if(root.left==null && root.right==null)
+              return 1;
+          if(root.left!=null && root.right==null)
+              return 2;
+          return 1+countNodes(root.left)+countNodes(root.right);
+    }
+
+
 }
