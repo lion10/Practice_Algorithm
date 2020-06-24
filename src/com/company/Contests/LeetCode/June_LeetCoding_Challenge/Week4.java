@@ -57,5 +57,19 @@ public class Week4 {
           return 1+countNodes(root.left)+countNodes(root.right);
     }
 
+    // Day 24  Unique Binary Search Trees
+    /** Given n, how many structurally unique BST's (binary search trees) that store values 1 ... n? */
 
+    public int numTrees(int n) {
+        int total[]= new int[n+1];
+        total[0]=1;
+        total[1]=1;
+
+        for(int i = 2;i <= n; i++){
+            for(int j = 0; j < i; j++){
+                total[i] += total[j] * total[i-j-1];
+            }
+        }
+        return total[n];
+    }
 }
