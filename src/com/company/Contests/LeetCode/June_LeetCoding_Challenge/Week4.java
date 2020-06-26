@@ -1,7 +1,9 @@
 package com.company.Contests.LeetCode.June_LeetCoding_Challenge;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Week4 {
 
@@ -72,4 +74,38 @@ public class Week4 {
         }
         return total[n];
     }
+
+    // Day 25 Find the Duplicate Number
+    /** Given an array nums containing n + 1 integers where each integer is between 1 and n (inclusive),
+     *  prove that at least one duplicate number must exist. Assume that there is only one duplicate number,
+     * find the duplicate one.*/
+
+
+    public int findDuplicate(int[] nums) {
+        int low = 1, high = nums.length - 1;
+        while (low <= high) {
+            int mid = (int) (low + (high - low) * 0.5);
+            int cnt = 0;
+            for (int a : nums) {
+                if (a <= mid) ++cnt;
+            }
+            if (cnt <= mid) low = mid + 1;
+            else high = mid - 1;
+        }
+        return low;
+    }
+
+
+    // use hash map
+    public int findDuplicate2(int[] nums) {
+        Set<Integer> numSet = new HashSet<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            if (numSet.add(nums[i]) == false)
+                return nums[i];
+        }
+
+        return 0;
+    }
+
 }
