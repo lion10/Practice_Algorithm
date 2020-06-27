@@ -108,4 +108,25 @@ public class Week4 {
         return 0;
     }
 
+    //Day 27  Sum Root to Leaf Numbers
+
+    /** Given a binary tree containing digits from 0-9 only, each root-to-leaf path could represent a number.
+
+     An example is the root-to-leaf path 1->2->3 which represents the number 123.
+
+     Find the total sum of all root-to-leaf numbers.
+
+     Note: A leaf is a node with no children.*/
+    public int sumNumbers(TreeNode root) {
+        return sumToLeaf(0, root);
+    }
+    int sumToLeaf(int current, TreeNode root){
+        if(root == null)
+            return 0;
+        current = (10*current) + root.val;
+        if(root.left == null && root.right == null)
+            return current;
+        return sumToLeaf(current, root.left) + sumToLeaf(current, root.right);
+    }
+
 }
