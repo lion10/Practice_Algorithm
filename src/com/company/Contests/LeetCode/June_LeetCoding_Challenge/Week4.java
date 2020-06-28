@@ -129,4 +129,28 @@ public class Week4 {
         return sumToLeaf(current, root.left) + sumToLeaf(current, root.right);
     }
 
+    // Day 27 Perfect Squares
+    /** Given a positive integer n, find the least number of perfect square numbers
+    (for example, 1, 4, 9, 16, ...) which sum to n.
+    */
+    public int numSquares(int n) {
+        int[] dp = new int[n + 1];
+        for (int i = 1; i <= n; i++) {
+            dp[i] = Integer.MAX_VALUE;
+        }
+        for (int i = 1; i <= n; i++) {
+            int square = (int)Math.sqrt(i);
+            if (square * square == i) {
+                dp[i] = 1;
+                continue;
+            }
+            for (int j = 1; j <= square; j++) {
+                int dif = i - j * j;
+                dp[i] = Math.min(dp[i], (dp[dif] + 1));
+            }
+        }
+
+        return dp[n];
+    }
+
 }
