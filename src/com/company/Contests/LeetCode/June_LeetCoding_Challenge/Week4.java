@@ -1,9 +1,6 @@
 package com.company.Contests.LeetCode.June_LeetCoding_Challenge;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Week4 {
 
@@ -139,7 +136,7 @@ public class Week4 {
             dp[i] = Integer.MAX_VALUE;
         }
         for (int i = 1; i <= n; i++) {
-            int square = (int)Math.sqrt(i);
+            int square = (int) Math.sqrt(i);
             if (square * square == i) {
                 dp[i] = 1;
                 continue;
@@ -151,6 +148,36 @@ public class Week4 {
         }
 
         return dp[n];
+    }
+
+    // Day 28  Reconstruct Itinerary
+    /** Given a list of airline tickets represented by pairs of departure and arrival airports [from, to],
+     * reconstruct the itinerary in order.
+     *  All of the tickets belong to a man who departs from JFK. Thus, the itinerary must begin with JFK.*/
+    public List<String> findItinerary(List<List<String>> tickets) {
+        Map<String, PriorityQueue<String>> ticketMap = new HashMap<>();
+        List<String> itinerary = new LinkedList<String>();
+
+        // add individual flight routes to map
+        for (List<String> ticket : tickets)
+            ticketMap.computeIfAbsent(ticket.get(0), k -> new PriorityQueue<String>()).add(ticket.get(1));
+
+        // push tickets to stack
+        Stack<String> ticketStk = new Stack<>();
+        ticketStk.push("JFK");
+
+        // compare stack and map to find departure and arrival airports
+        while(!ticketStk.isEmpty()){
+            String source = ticketStk.peek();
+
+            if(ticketMap.containsKey(source) && !ticketMap.get(source).isEmpty())
+                ticketStk.push(ticketMap.get(source).poll());
+            else
+                itinerary.add(0, ticketStk.pop());
+
+        }
+
+        return itinerary;
     }
 
 }
