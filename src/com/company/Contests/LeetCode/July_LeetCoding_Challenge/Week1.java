@@ -104,4 +104,27 @@ public class Week1 {
         }
         return result;
     }
+
+    // Day 4 Ugly Number II
+    /** Write a program to find the n-th ugly number.
+     Ugly numbers are positive numbers whose prime factors only include 2, 3, 5. */
+
+    public int nthUglyNumber(int n) {
+
+        int[] dp = new int[n];
+        dp[0]=1;
+        int tow = 0 , three = 0 ,fife =0;
+        for (int i = 1; i < n; i++) {
+            dp[i] = Math.min(dp[tow] * 2 , Math.min(dp[three] * 3, dp[fife] * 5));
+
+            if (dp[i] == dp[tow] * 2 )
+                tow++;
+            if (dp[i] == dp[three] * 3 )
+                three++;
+            if (dp[i] == dp[fife] * 5 )
+                fife++;
+        }
+
+        return dp[n-1];
+    }
 }
