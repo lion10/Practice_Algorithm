@@ -135,4 +135,33 @@ public class Week1 {
     public int hammingDistance(int x, int y) {
         return Integer.bitCount(x ^ y);
     }
+
+    // Day 6 Plus One
+
+    /** Given a non-empty array of digits representing a non-negative integer, plus one to the integer.
+
+     The digits are stored such that the most significant digit is at the head of the list, and each element in the array contain a single digit.
+
+     You may assume the integer does not contain any leading zero, except the number 0 itself.*/
+    public int[] plusOne(int[] digits) {
+     int len = digits.length;
+     // last item != 9
+        if(digits[len-1] != 9){
+            digits[len-1] = digits[len-1] + 1 ;
+            return digits ;
+        }
+        // last item == 9
+        for (int i = len -1; i >=0 ; i--) {
+            digits[i] = ( digits[i] + 1 ) % 10;
+            if(digits[i] != 0){
+                return digits;
+            }
+        }
+        // num = 999
+        int[]arr = new int[len+1];
+        Arrays.fill(arr ,0);
+        arr[0] = 1 ;
+        return arr;
+
+    }
 }
