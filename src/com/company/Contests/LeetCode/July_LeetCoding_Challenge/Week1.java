@@ -164,4 +164,42 @@ public class Week1 {
         return arr;
 
     }
+
+    // Day 7 Island Perimeter
+    /** You are given a map in form of a two-dimensional integer grid where 1 represents land and 0 represents water.
+
+     Grid cells are connected horizontally/vertically (not diagonally). The grid is completely surrounded by water, and there is exactly one island (i.e., one or more connected land cells).
+
+     The island doesn't have "lakes" (water inside that isn't connected to the water around the island). One cell is a square with side length 1.
+     The grid is rectangular, width and height don't exceed 100. Determine the perimeter of the island.*/
+
+
+    public int islandPerimeter(int[][] grid) {
+
+        int perim = 0;
+        for(int i = 0; i < grid.length; i++) {
+            for(int j = 0; j < grid[i].length; j++) {
+                if(grid[i][j] == 1) {
+                    perim += surrounded(grid, i, j);
+                }
+            }
+        }
+        return perim;
+    }
+    public int surrounded(int[][] grid, int i, int j) {
+        int surr = 0;
+        if(i > 0 && grid[i - 1][j] == 1) {
+            surr++;
+        }
+        if(j > 0 && grid[i][j - 1] == 1) {
+            surr++;
+        }
+        if(i < grid.length - 1 && grid[i + 1][j] == 1) {
+            surr++;
+        }
+        if(j < grid[i].length - 1 && grid[i][j + 1] == 1) {
+            surr++;
+        }
+        return (4 - surr);
+    }
 }
