@@ -203,40 +203,5 @@ public class Week1 {
         return (4 - surr);
     }
 
-    // Day 8 3Sum
 
-    /** Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0?
-     *  Find all unique triplets in the array which gives the sum of zero.
-     *  Note:
-     *  The solution set must not contain duplicate triplets.*/
-
-    public List<List<Integer>> threeSum(int[] nums) {
-        Arrays.sort(nums);
-        int n = nums.length;
-        List<List<Integer>> ans = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            if (nums[i] > 0)
-                break;
-            int j = i + 1, k = n - 1;
-            while (j < k) {
-                int sum = nums[i] + nums[j] + nums[k];
-                if (sum < 0)
-                    j++;
-                else if (sum > 0)
-                    k--;
-                else {
-                    ans.add(Arrays.asList(nums[i], nums[j], nums[k]));
-                    // Skip duplicate numbers of j
-                    while (j+1 <= k && nums[j] == nums[j+1])
-                        j++;
-                    j++;
-                    k--;
-                }
-            }
-            // Skip duplicate numbers of i
-            while (i+1 < n && nums[i+1] == nums[i])
-                i++;
-        }
-        return ans;
-    }
 }
