@@ -103,4 +103,49 @@ public class Week2 {
             this.pos = val;
         }
     }
+
+    // Day 10 Flatten a Multilevel Doubly Linked List
+
+    /** You are given a doubly linked list which in addition to the next and previous pointers, it could have a child
+     *  pointer,
+     *  which may or may not point to a separate doubly linked list. These child lists may have one or more children of
+     *  their own, and so on, to produce a multilevel data structure,
+     *  as shown in the example below. Flatten the list so that all the nodes appear in a single-level, doubly linked list.
+     *  You are given the head of the first level of the list.*/
+
+    public class Node1 {
+        public int val;
+        public Node1 prev;
+        public Node1 next;
+        public Node1 child;
+    };
+
+    public Node1 flatten(Node1 head) {
+        Stack<Node1> stack = new Stack<>();
+        Node1 current = head,tail = head;
+        while(current != null){
+            if(current.child != null){
+                Node1 child = current.child;
+                if(current.next!=null){
+                    current.next.prev=null;
+                    stack.push(current.next);
+                }
+                current.next=child;
+                current.child=null;
+                child.prev = current;
+            }
+            tail=current;
+            current=current.next;
+        }
+        while(!stack.isEmpty()){
+            current = stack.pop();
+            tail.next=current;
+            current.prev = tail;
+            while(current!=null){
+                tail=current;
+                current=current.next;
+            }
+        }
+        return head;
+    }
 }
