@@ -161,6 +161,8 @@ public class Week2 {
         return output;
     }
 
+
+
     public void dfs(int index, int[] nums, ArrayList<Integer> list) {
         if (index == nums.length) {
             output.add(new ArrayList<Integer>(list));
