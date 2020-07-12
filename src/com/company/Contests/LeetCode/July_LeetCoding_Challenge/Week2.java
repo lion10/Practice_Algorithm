@@ -148,4 +148,27 @@ public class Week2 {
         }
         return head;
     }
+
+    // Day 11 Subsets
+    /** Given a set of distinct integers, nums, return all possible subsets (the power set).
+
+     Note: The solution set must not contain duplicate subsets.*/
+
+    List<List<Integer>> output = new ArrayList();
+
+    public List<List<Integer>> subsets(int[] nums) {
+        dfs(0, nums, new ArrayList<Integer>());
+        return output;
+    }
+
+    public void dfs(int index, int[] nums, ArrayList<Integer> list) {
+        if (index == nums.length) {
+            output.add(new ArrayList<Integer>(list));
+            return;
+        }
+        list.add(nums[index]);
+        dfs(index+1, nums, list);
+        list.remove(list.size()-1);
+        dfs(index+1, nums, list);
+    }
 }
