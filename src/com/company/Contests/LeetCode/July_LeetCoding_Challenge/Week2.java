@@ -161,8 +161,6 @@ public class Week2 {
         return output;
     }
 
-
-
     public void dfs(int index, int[] nums, ArrayList<Integer> list) {
         if (index == nums.length) {
             output.add(new ArrayList<Integer>(list));
@@ -173,4 +171,13 @@ public class Week2 {
         list.remove(list.size()-1);
         dfs(index+1, nums, list);
     }
+
+    // Day 12 Reverse Bits
+    /** Reverse bits of a given 32 bits unsigned integer.*/
+
+    public int reverseBits(int n) {
+        return Integer.reverse(n);
+    }
+
+
 }
