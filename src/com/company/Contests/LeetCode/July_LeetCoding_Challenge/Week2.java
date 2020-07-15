@@ -191,4 +191,19 @@ public class Week2 {
             return false;
         return q.val == p.val && isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
     }
+
+
+    // Day 14 Angle Between Hands of a Clock
+    /** Given two numbers, hour and minutes. Return the smaller angle (in degrees)
+     *  formed between the hour and the minute hand.
+     */
+
+    public double angleClock(int hour, int minutes) {
+        double result = Math.abs(((minutes/60.0) *360) - (((hour/12.0) * 360) + ((minutes/60.0) * 30)));
+        if(result > 180.0){
+            result = 360.0 - result;
+        }
+        return result;
+    }
+
 }
