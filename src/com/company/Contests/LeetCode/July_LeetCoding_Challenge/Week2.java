@@ -206,4 +206,14 @@ public class Week2 {
         return result;
     }
 
+    // Day 15 Reverse Words in a String
+    /** Given an input string, reverse the string word by word.
+     */
+
+    public String reverseWords(String s) {
+        String[] words = s.trim().split(" +");
+        Collections.reverse(Arrays.asList(words));
+        return String.join(" ", words);
+    }
+
 }
