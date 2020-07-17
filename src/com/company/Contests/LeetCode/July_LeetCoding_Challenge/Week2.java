@@ -216,4 +216,19 @@ public class Week2 {
         return String.join(" ", words);
     }
 
+    // Day 16 Pow(x, n)
+    /** Implement pow(x, n), which calculates x raised to the power n (xn).*/
+
+    public double myPow(double x, int n) {
+        if(n == 1)
+            return x;
+        if(n == -1)
+            return 1 / x;
+        if(n == 0)
+            return 1.0;
+
+        double half = myPow(x, n / 2);
+        return half * half * myPow(x, n % 2);
+    }
+
 }
