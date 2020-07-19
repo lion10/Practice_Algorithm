@@ -206,48 +206,6 @@ public class Week2 {
         return result;
     }
 
-    // Day 15 Reverse Words in a String
-    /** Given an input string, reverse the string word by word.
-     */
 
-    public String reverseWords(String s) {
-        String[] words = s.trim().split(" +");
-        Collections.reverse(Arrays.asList(words));
-        return String.join(" ", words);
-    }
-
-    // Day 16 Pow(x, n)
-    /** Implement pow(x, n), which calculates x raised to the power n (xn).*/
-
-    public double myPow(double x, int n) {
-        if(n == 1)
-            return x;
-        if(n == -1)
-            return 1 / x;
-        if(n == 0)
-            return 1.0;
-
-        double half = myPow(x, n / 2);
-        return half * half * myPow(x, n % 2);
-    }
-    // Day 17 Top K Frequent Elements
-    /** Given a non-empty array of integers, return the k most frequent elements. */
-
-    public int[] topKFrequent(int[] nums, int k) {
-        HashMap<Integer, Integer> freq = new HashMap<>();
-        int[] result = new int[k];
-        PriorityQueue<Integer> pq= new PriorityQueue<>((a, b)->freq.get(b) - freq.get(a));
-        for(int i=0; i<nums.length; i++) {
-            freq.put(nums[i], freq.getOrDefault(nums[i], 0) + 1);
-        }
-        for(int key: freq.keySet()) {
-            pq.add(key);
-        }
-        while(k>0) {
-            result[k-1] = pq.poll();
-            k --;
-        }
-        return result;
-    }
 
 }
