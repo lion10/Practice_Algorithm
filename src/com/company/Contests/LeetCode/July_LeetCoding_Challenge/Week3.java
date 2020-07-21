@@ -138,4 +138,32 @@ public class Week3 {
 
         return sb.toString();
     }
+    // Day 20 Remove Linked List Elements
+    /** Remove all elements from a linked list of integers that have value val.
+     */
+    public class ListNode {
+        int val;
+        ListNode next;
+        ListNode() {}
+        ListNode(int val) { this.val = val; }
+        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+    }
+
+    public ListNode removeElements(ListNode head, int val) {
+        while(head != null && head.val == val){
+            head = head.next;
+        }
+        if(head == null)
+            return null;
+        ListNode pre = head, cur = head.next;
+        while(cur != null){
+            if(cur.val == val){
+                pre.next = cur.next;
+            }else {
+                pre = pre.next;
+            }
+            cur = cur.next;
+        }
+        return head;
+    }
 }
