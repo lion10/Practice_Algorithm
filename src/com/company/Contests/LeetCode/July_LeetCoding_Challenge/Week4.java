@@ -1,8 +1,6 @@
 package com.company.Contests.LeetCode.July_LeetCoding_Challenge;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class Week4 {
 
@@ -73,4 +71,30 @@ public class Week4 {
 
         return res;
     }
+
+    // Day 23 Single Number III
+    /** Given an array of numbers nums, in which exactly two elements appear only once
+     * and all the other elements appear exactly twice. Find the two elements that appear only once.*/
+
+    public int[] singleNumber(int[] nums) {
+
+        int[] result = new int[2];
+        HashSet<Integer> set = new HashSet<>();
+        for(int num : nums){
+            if(!set.contains(num)){
+                set.add(num);
+            }else{
+                set.remove(num);
+            }
+        }
+
+        int i = 0;
+        Iterator<Integer> itr = set.iterator();
+        while(itr.hasNext()){
+            result[i++] = itr.next();
+        }
+
+        return result;
+    }
+
 }
