@@ -96,5 +96,36 @@ public class Week4 {
 
         return result;
     }
+    // Day 24 - July: All Paths From Source to Target
+    /** Given a directed, acyclic graph of N nodes.  Find all possible paths from node 0 to node N-1, and return them in any order.
+     The graph is given as follows:  the nodes are 0, 1, ..., graph.length - 1.  graph[i] is a list of all nodes j for
+     which the edge (i, j) exists.*/
+
+    private void pathFromNode(int[][] graph, int idx, List<List<Integer>> res, List<Integer> path) {
+        // return if node outdegree is 0 and it's not last node
+        if(idx < graph.length-1 && graph[idx].length<1)
+            return;
+        // path found, add to result
+        if(idx >= graph.length-1)
+            res.add(path);
+
+        // get path from all neighbours
+        for(int v: graph[idx]) {
+            // clone path found yet
+            List<Integer> cp = new ArrayList(path);
+            cp.add(v);
+            pathFromNode(graph, v, res, cp);
+        }
+
+    }
+
+    public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+        List<List<Integer>> res = new ArrayList();
+        List<Integer> path = new ArrayList();
+        path.add(0);
+        // start from node 0
+        pathFromNode(graph, 0, res, path);
+        return res;
+    }
 
 }
