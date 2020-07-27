@@ -146,4 +146,25 @@ public class Week4 {
         return tail;
     }
 
+
+
+    // Day 26: Add Digits
+    /** Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.
+     */
+    public int addDigits(int num) {
+        int sum=0;
+        while(num >= 10){
+            sum += num % 10;
+            num /= 10;
+        }
+        sum += num;
+        if(sum >= 10){
+            return addDigits(sum);
+        }
+        return sum;
+    }
+
+
+
+
 }
