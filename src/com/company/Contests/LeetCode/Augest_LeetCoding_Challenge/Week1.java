@@ -1,5 +1,7 @@
 package com.company.Contests.LeetCode.Augest_LeetCoding_Challenge;
 
+import java.util.ArrayList;
+
 public class Week1 {
 
 
@@ -30,5 +32,40 @@ public class Week1 {
         }
         return false;
     }
+
+
+    // Day 2: Design HashSet
+
+    /**
+     * Design a HashSet without using any built-in hash table libraries.
+     * To be specific, your design should include these functions:
+     * add(value): Insert a value into the HashSet.
+     * contains(value) : Return whether the value exists in the HashSet or not.
+     * remove(value): Remove a value in the HashSet. If the value does not exist in the HashSet, do nothing.
+     * */
+
+    class MyHashSet {
+        ArrayList<Integer> arrayList;
+        /** Initialize your data structure here. */
+        public MyHashSet() {
+            arrayList = new ArrayList<>();
+        }
+
+        public void add(int key) {
+            if (!arrayList.contains(key))
+                arrayList.add(key);
+        }
+
+        public void remove(int key) {
+            Integer val = new Integer(key);
+            arrayList.remove(val);
+        }
+
+        /** Returns true if this set contains the specified element */
+        public boolean contains(int key) {
+            return arrayList.contains(key);
+        }
+    }
+
 
 }
