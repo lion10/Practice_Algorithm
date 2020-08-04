@@ -67,5 +67,49 @@ public class Week1 {
         }
     }
 
+    // Day 3: Valid Palindrome
+    /** Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+     Note: For the purpose of this problem, we define empty string as valid palindrome.*/
+
+    public boolean isPalindrome(String s) {
+        int start = 0, end = s.length()-1;
+
+        while(start < end) {
+            if (!isAlphaNum(s.charAt(start))) {
+                start++;
+                continue;
+            }
+
+            if (!isAlphaNum(s.charAt(end))) {
+                end--;
+                continue;
+            }
+
+            if (!isEqual(s.charAt(start),s.charAt(end)))
+                return false;
+
+            start++;
+            end--;
+        }
+        return true;
+    }
+
+    boolean isNum(char c) {
+        return c >= '0' && c <= '9';
+    }
+
+    boolean isAlphaNum(char c) {
+        return isAlpha(c) || isNum(c);
+    }
+
+    boolean isAlpha(char c) {
+        return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+    }
+
+    boolean isEqual(char c1, char c2) {
+        return Math.abs(c1 - c2) == 0 || (Math.abs(c1 - c2) == 32 && !isNum(c1) && !isNum(c2));
+    }
 
 }
+
+
