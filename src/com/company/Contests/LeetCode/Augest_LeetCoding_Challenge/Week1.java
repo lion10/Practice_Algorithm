@@ -110,6 +110,18 @@ public class Week1 {
         return Math.abs(c1 - c2) == 0 || (Math.abs(c1 - c2) == 32 && !isNum(c1) && !isNum(c2));
     }
 
+
+    // Day 4: Power of Four
+    /** Given an integer (signed 32 bits), write a function to check whether it is a power of 4.
+     */
+    public boolean isPowerOfFour(int num) {
+        double res = Math.log10(num) / Math.log10(4);
+        if(res - (int)res == 0)
+            return true;
+        else
+            return false;
+    }
+
 }
 
 
