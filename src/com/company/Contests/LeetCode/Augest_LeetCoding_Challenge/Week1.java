@@ -1,6 +1,9 @@
 package com.company.Contests.LeetCode.Augest_LeetCoding_Challenge;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Week1 {
 
@@ -121,7 +124,58 @@ public class Week1 {
         else
             return false;
     }
+    // Day 5: Add and Search Word - Data structure design
 
+    /** Design a data structure that supports the following two operations:
+     * void addWord(word)
+     * bool search(word)
+     * search(word) can search a literal word or a regular expression
+     * string containing only letters a-z or .. A . means it can represent any one letter.
+     */
+
+
+    class WordDictionary {
+
+        private Map<Integer, List<String>> map;
+
+        /**
+         * Initialize your data structure here.
+         */
+        public WordDictionary() {
+            map = new HashMap<>();
+        }
+
+        /**
+         * Adds a word into the data structure.
+         */
+        public void addWord(String word) {
+            int len = word.length();
+            if (!map.containsKey(len))
+                map.put(len, new ArrayList<>());
+            map.get(len).add(word);
+        }
+
+        /**
+         * Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter.
+         */
+        public boolean search(String word) {
+            int len = word.length();
+            if (!map.containsKey(len)) return false;
+            for (String s : map.get(len)) {
+                if (match(s, word)) return true;
+            }
+            return false;
+        }
+
+
+        private boolean match(String s, String t) {
+            for (int i = 0; i < s.length(); i++) {
+                if (t.charAt(i) != '.' && t.charAt(i) != s.charAt(i))
+                    return false;
+            }
+            return true;
+        }
+    }
 }
 
 
