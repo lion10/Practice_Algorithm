@@ -1,9 +1,6 @@
 package com.company.Contests.LeetCode.Augest_LeetCoding_Challenge;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Week1 {
 
@@ -196,6 +193,108 @@ public class Week1 {
             }
         }
         return ans;
+    }
+
+
+
+
+    //Day 7: Vertical Order Traversal of a Binary Tree
+    /**
+     Given a binary tree, return the vertical order traversal of its nodes values.
+     For each node at position (X, Y), its left and right children respectively will be at positions (X-1, Y-1) and (X+1, Y-1).
+     Running a vertical line from X = -infinity to X = +infinity, whenever the vertical line touches some nodes, we report the values of the nodes in order from top to bottom (decreasing Y coordinates).
+     If two nodes have the same position, then the value of the node that is reported first is the value that is smaller.
+     Return an list of non-empty reports in order of X coordinate.  Every report will have a list of values of nodes.
+     */
+
+
+    class Solution {
+
+        public class TreeNode {
+             int val;
+             TreeNode left;
+             TreeNode right;
+             TreeNode() {}
+             TreeNode(int val) { this.val = val; }
+             TreeNode(int val, TreeNode left, TreeNode right) {
+                 this.val = val;
+                 this.left = left;
+                 this.right = right;
+             }
+        }
+
+        HashMap<Integer, HashMap> map = null;
+
+        int min_x = 0;
+        int max_x = 0;
+
+        int min_y = 0;
+        //max_y will always be 0;
+
+        public List<List<Integer>> verticalTraversal(TreeNode root) {
+
+            map = new HashMap<Integer, HashMap>(); //map to store x
+
+            int x = 0;
+            int y = 0;
+
+            traverseTree(root, x, y);
+
+            ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+            for (x = min_x; x <= max_x; x++) {
+                if(map.containsKey(x)) {
+                    HashMap<Integer, ArrayList<Integer>> subMap = map.get(x);
+                    ArrayList<Integer> arr = new ArrayList<Integer>();
+                    for(y = 0; y >= min_y; y-- ) {
+                        if(subMap.containsKey(y)){
+                            ArrayList<Integer> list = subMap.get(y);
+                            Collections.sort(list);
+                            for(int i : list){
+                                arr.add(i);
+                            }
+                        }
+                    }
+                    result.add(arr);
+                }
+            }
+
+            return (List) result;
+        }
+
+        public void traverseTree(TreeNode treeNode, int x, int y){
+
+            HashMap<Integer, ArrayList<Integer>> subMap = null;
+
+            if(x < min_x)
+                min_x = x;
+            if(x > max_x)
+                max_x = x;
+            if(y < min_y)
+                min_y = y;
+
+            if( map.containsKey(x) )
+                subMap = map.get(x);
+            else {
+                subMap = new HashMap<Integer, ArrayList<Integer>>();
+                map.put(x, subMap);
+            }
+
+            ArrayList<Integer> list = null;
+            if(subMap.containsKey(y)) {
+                list = subMap.get(y);
+            } else {
+                list = new ArrayList<Integer>();
+                subMap.put(y, list);
+            }
+
+            list.add(treeNode.val);
+
+            if(treeNode.left != null)
+                traverseTree(treeNode.left, x-1, y-1);
+            if(treeNode.right != null)
+                traverseTree(treeNode.right, x+1, y-1);
+        }
+
     }
 }
 
