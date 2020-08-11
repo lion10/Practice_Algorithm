@@ -103,4 +103,19 @@ public class Week2 {
         //-1 because first iteration is all rotten oranges from the initial state
         return Math.max(0, stepCount-1);
     }
+
+
+    // Day 10: Excel Sheet Column Number
+    /** Given a column title as appear in an Excel sheet, return its corresponding column number.
+     */
+    public int titleToNumber(String s) {
+        int number = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            number *= 26;
+            number += s.charAt(i) - 'A' + 1;
+        }
+
+        return number;
+    }
 }
