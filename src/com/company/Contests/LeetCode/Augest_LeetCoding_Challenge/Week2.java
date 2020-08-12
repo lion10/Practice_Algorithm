@@ -1,5 +1,6 @@
 package com.company.Contests.LeetCode.Augest_LeetCoding_Challenge;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -117,5 +118,35 @@ public class Week2 {
         }
 
         return number;
+    }
+
+
+    //  Day 11: H-Index
+    /**
+     * Given an array of citations (each citation is a non-negative integer) of a researcher,
+     * write a function to compute the researcher's h-index.
+     * According to the definition of h-index on Wikipedia: "A scientist has index
+     * h if h of his/her N papers have at least h citations each,
+     * and the other N − h papers have no more than h citations each."*/
+
+    public int hIndex(int[] citations) {
+        Integer[] input = Arrays.stream(citations).boxed().toArray(Integer[]::new);
+        Arrays.sort(input, (a, b) -> b - a); // reverse order
+
+        int start=0;
+        int end=input.length-1;
+
+        while(start<=end){
+
+            int mid = start+ (end-start)/2;
+
+            if(mid+1<=input[mid]){
+                start = mid+1;
+            }else{
+                end = mid-1;
+            }
+        }
+
+        return start;
     }
 }
