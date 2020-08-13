@@ -1,8 +1,7 @@
 package com.company.Contests.LeetCode.Augest_LeetCoding_Challenge;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Week2 {
 
@@ -148,5 +147,50 @@ public class Week2 {
         }
 
         return start;
+    }
+
+
+    // Day 14: Pascal's Triangle II
+    /**
+     * Given a non-negative index k where k ≤ 33, return the kth index row of the Pascal's triangle.
+     * Note that the row index starts from 0.
+     * */
+    public List<Integer> getRow(int rowIndex) {
+
+   /*     List<int[]> list = new ArrayList<>();
+        list.add(new int[]{1});
+        list.add(new int[]{1,1});
+        int i = 2;
+        while (i <= rowIndex){
+            int[] te = new int[i+1];
+            te[0] = 1;
+            te[i] = 1;
+            for(int j = 0; j < i - 1 ;j++){
+                te[j+1] = te[j] + te[j+1];
+            }
+            list.add(te);
+            i++;
+        }
+        return  Arrays.stream(list.get(list.size()-1))     // IntStream
+                .boxed()        // Stream<Integer>
+                .collect(Collectors.toList());*/
+
+
+        List<List> list = new ArrayList();
+        List list1 = new ArrayList();
+        list1.add(1);
+        list.add(list1);
+        for(int i = 1 ; i <= rowIndex ; i++){
+            List<Integer> list2 = new ArrayList();
+            List<Integer> list3 = list.get(i-1);
+            list2.add(1);
+            for(int j = 0 ; j < list3.size() -1 ; j++)
+                list2.add(list3.get(j) + list3.get(j+1));
+            list2.add(1);
+            list.add(list2);
+        }
+        return list.get(list.size()-1);
+
+
     }
 }
