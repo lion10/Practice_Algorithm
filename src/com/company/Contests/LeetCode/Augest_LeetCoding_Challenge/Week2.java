@@ -150,7 +150,7 @@ public class Week2 {
     }
 
 
-    // Day 14: Pascal's Triangle II
+    // Day 12: Pascal's Triangle II
     /**
      * Given a non-negative index k where k ≤ 33, return the kth index row of the Pascal's triangle.
      * Note that the row index starts from 0.
@@ -190,7 +190,75 @@ public class Week2 {
             list.add(list2);
         }
         return list.get(list.size()-1);
-
-
     }
+
+
+
+    // Day 13:  Iterator for Combination
+    /** Design an Iterator class, which has:
+     A constructor that takes a string characters of sorted distinct lowercase English letters and a number combinationLength as arguments.
+     A function next() that returns the next combination of length combinationLength in lexicographical order.
+     A function hasNext() that returns True if and only if there exists a next combination.
+     */
+    class CombinationIterator {
+
+        ArrayList<String> list;
+        int index;
+
+        public CombinationIterator(String characters, int combinationLength) {
+            list = new ArrayList<>();
+            index = -1;
+
+            createList(characters, combinationLength);
+        }
+
+        public String next() {
+            index++;
+            return list.get(index);
+        }
+
+        public boolean hasNext() {
+            if(index+1 == list.size())      return false;
+            return true;
+        }
+
+        public void createList(String characters, int combinationLength){
+
+            int n = 0;
+            while(true){
+                StringBuilder sb = new StringBuilder();
+                String s = Integer.toBinaryString(n);
+                if(s.length() > characters.length())
+                    return;
+
+                if(isPerfectLength(n, combinationLength)){
+                    int j = characters.length()-1;
+                    for(int i=s.length()-1; i>=0; i--){
+                        if(s.charAt(i) == '1'){
+                            sb.append(characters.charAt(j));
+                        }
+                        j--;
+                    }
+                    list.add(0, sb.reverse().toString());
+                }
+                n++;
+            }
+        }
+
+        public boolean isPerfectLength(int n, int combinationLength){
+            int count = 0;
+
+            while(n > 0){
+                n = n & (n-1);
+                count++;
+            }
+
+            if(count == combinationLength)
+                return true;
+
+            return false;
+        }
+    }
+
+
 }
