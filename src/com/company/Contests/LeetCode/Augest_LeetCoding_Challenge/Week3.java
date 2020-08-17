@@ -50,4 +50,29 @@ public class Week3 {
         }
         return ans;
     }
+
+
+    // Day 16: Best Time to Buy and Sell Stock III
+    /** Say you have an array for which the ith element is the price of a given stock on day i.
+     Design an algorithm to find the maximum profit. You may complete at most two transactions.
+     Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).*/
+    public int maxProfit(int[] prices) {
+        int n = prices.length;
+        if(n==0) {
+            return 0;
+        }
+
+        int fb = Integer.MIN_VALUE;
+        int sb = Integer.MIN_VALUE;
+        int fs = 0;
+        int ss = 0;
+
+        for(int i=0;i<n;i++) {
+            fb = Math.max(fb,-prices[i]);
+            fs = Math.max(fs, fb + prices[i]);
+            sb = Math.max(sb, fs - prices[i]);
+            ss = Math.max(ss, sb + prices[i]);
+        }
+        return ss;
+    }
 }
