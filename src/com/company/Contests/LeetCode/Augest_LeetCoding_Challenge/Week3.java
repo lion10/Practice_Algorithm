@@ -75,4 +75,57 @@ public class Week3 {
         }
         return ss;
     }
+
+
+
+    //  Day 17: Distribute Candies to People
+    /** We distribute some number of candies, to a row of n = num_people people in the following way:
+     We then give 1 candy to the first person, 2 candies to the second person, and so on until we give n candies to the last person.
+     Then, we go back to the start of the row, giving n + 1 candies to the first person, n + 2 candies to the second person, and so on until we give 2 * n candies to the last person.
+     This process repeats (with us giving one more candy each time, and moving to the start of the row after we reach the end) until we run out of candies.  The last person will receive all of our remaining candies (not necessarily one more than the previous gift).
+     Return an array (of length num_people and sum candies) that represents the final distribution of candies.
+     */
+
+
+    public int[] distributeCandies(int candies, int num_people) {
+
+        // Time Limit Exceeded
+     /*  int count = 1;
+       boolean test = true;
+       int[] result = new int[num_people];
+       int j = 0;
+       int total = 0;
+       while(test){
+           result[j] = count;
+           total += result[j];
+           if (total == candies){
+               test = false;
+           }
+           j++;
+           count++;
+           if (result.length == num_people){
+               j = 0;
+           }
+       }
+       return result;*/
+
+
+        int[] result = new int[num_people];
+        if(candies == 0) {
+            return result;
+        }
+        int n = 1;
+
+
+        while(candies - n > 0) {
+            result[(n - 1) % num_people] += n;
+            candies -= n;
+            n++;
+        }
+
+        if(candies > 0) {
+            result[(n- 1) % num_people] += candies;
+        }
+        return result;
+    }
 }
