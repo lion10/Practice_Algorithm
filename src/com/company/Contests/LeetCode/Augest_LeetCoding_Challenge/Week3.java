@@ -1,7 +1,9 @@
 package com.company.Contests.LeetCode.Augest_LeetCoding_Challenge;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 public class Week3 {
 
@@ -128,4 +130,56 @@ public class Week3 {
         }
         return result;
     }
+
+
+
+    // Day 18: Numbers With Same Consecutive Differences
+    /**
+     * Return all non-negative integers of length N such that the absolute difference between every two consecutive digits is K.
+     *
+     * Note that every number in the answer must not have leading zeros except for the number 0 itself. For example, 01 has one leading zero and is invalid, but 0 is valid.
+     *
+     * You may return the answer in any order.*/
+
+    public int[] numsSameConsecDiff(int N, int K) {
+        if (N == 1)
+            return new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+        List<Integer> result = new ArrayList<>();
+        for (int num = 1; num < 10; ++num)
+            dfs(N - 1, num, K, result);
+
+        // convert the ArrayList to int[]
+        return result.stream().mapToInt(i -> i).toArray();
+    }
+
+    private void dfs(int N, int num, int K, List<Integer> results) {
+        if (N == 0) {
+            results.add(num);
+            return;
+        }
+
+//        if (num % 10 + K < 10)
+//            dfs(N - 1, num * 10 + num % 10 + K, K, results);
+//
+//        if (K > 0 && num % 10 - K >= 0)
+//            dfs(N - 1, num * 10 + num % 10 - K, K, results);
+
+        List<Integer> nextDigits = new ArrayList<>();
+
+        Integer tailDigit = num % 10;
+        nextDigits.add(tailDigit + K);
+        if (K != 0)
+            nextDigits.add(tailDigit - K);
+        for (Integer nextDigit : nextDigits) {
+            if (0 <= nextDigit && nextDigit < 10) {
+                Integer newNum = num * 10 + nextDigit;
+                this.dfs(N - 1, newNum, K, results);
+            }
+        }
+    }
+
+
+
+
 }
