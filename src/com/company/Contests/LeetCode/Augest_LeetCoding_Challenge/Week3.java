@@ -1,9 +1,6 @@
 package com.company.Contests.LeetCode.Augest_LeetCoding_Challenge;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Week3 {
 
@@ -179,6 +176,82 @@ public class Week3 {
         }
     }
 
+    // Day 19: Goat Latin
+
+    /** A sentence S is given, composed of words separated by spaces. Each word consists of lowercase and uppercase letters only.
+     We would like to convert the sentence to "Goat Latin" (a made-up language similar to Pig Latin.)
+     The rules of Goat Latin are as follows:
+     If a word begins with a vowel (a, e, i, o, or u), append "ma" to the end of the word.
+     For example, the word 'apple' becomes 'applema'.
+     If a word begins with a consonant (i.e. not a vowel), remove the first letter and append it to the end, then add "ma".
+     For example, the word "goat" becomes "oatgma".
+     Add one letter 'a' to the end of each word per its word index in the sentence, starting with 1.
+     For example, the first word gets "a" added to the end, the second word gets "aa" added to the end and so on.
+     Return the final sentence representing the conversion from S to Goat Latin. */
+
+
+    public String toGoatLatin(String S) {
+            String splitSentence[] = S.split(" ");
+            String appendStr = "a";
+
+            for (int i = 0; i < splitSentence.length; i++) {
+
+                String word = splitSentence[i];
+                char firstLetter = Character.toLowerCase(word.charAt(0));
+
+                if (firstLetter == 'a' || firstLetter == 'e' || firstLetter == 'i' || firstLetter == 'o' || firstLetter == 'u') {
+
+                    splitSentence[i] = splitSentence[i] + "ma" + appendStr;
+                } else {
+
+                    String char1 = String.valueOf(splitSentence[i].charAt(0));
+                    splitSentence[i] = splitSentence[i].substring(1) + char1 + "ma" + appendStr;
+
+                }
+
+                appendStr += "a";
+            }
+
+            return String.join(" ", splitSentence);
+
+
+    }
+
+        // 2nd sol
+    private static Set<Character> vowels =
+            new HashSet<Character>() {
+                {
+                    add('a');
+                    add('e');
+                    add('i');
+                    add('o');
+                    add('u');
+                    add('A');
+                    add('E');
+                    add('I');
+                    add('O');
+                    add('U');
+                }
+            };
+
+
+    public String toGoatLatin2(String S) {
+        String suff = "";
+        StringBuilder sb = new StringBuilder();
+
+        for (String tok : S.split(" ")) {
+            suff += 'a'; // Java compiler converts this into a temporary StringBuilder
+
+            if (!vowels.contains(tok.charAt(0))) {
+                tok = tok.substring(1) + tok.charAt(0);
+            }
+
+            sb.append(tok).append("ma").append(suff).append(' ');
+        }
+
+        sb.deleteCharAt(sb.length() - 1); // remove extra space
+        return sb.toString();
+    }
 
 
 
