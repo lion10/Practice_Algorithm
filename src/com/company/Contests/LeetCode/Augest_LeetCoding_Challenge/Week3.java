@@ -255,4 +255,59 @@ public class Week3 {
 
 
 
+    // Day 20: reorder List
+    /** Given a singly linked list L: L0→L1→…→Ln-1→Ln,
+     reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
+     You may not modify the values in the list's nodes, only nodes itself may be changed.*/
+    public class ListNode {
+         int val;
+         ListNode next;
+         ListNode() {}
+         ListNode(int val) { this.val = val; }
+         ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+    }
+
+    public void reorderList(ListNode head) {
+        if(head == null || head.next == null || head.next.next == null) return ;
+
+        // Find the mid using {slow,fast} pointers
+        ListNode mid = null;
+        ListNode slow = head.next;
+        ListNode fast = slow.next;
+
+        while(fast.next!=null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // Found the mid and divide the linked list into two.
+        mid = slow.next;
+        slow.next = null;
+
+        // Reverse the 2nd (half) linked list starts from mid.
+        ListNode head2 = mid;
+        while(mid.next != null) {
+            ListNode temp = mid.next;
+            mid.next = temp.next;
+            temp.next = head2;
+            head2 = temp;
+            temp = null;
+        }
+
+        // Merge 1st (half) and 2nd (half) linked list.
+        ListNode p1 = head;
+        ListNode p2 = head2;
+
+        while(p1 != null && p2 != null) {
+            ListNode temp = p2;
+            p2 = p2.next;
+            temp.next = p1.next;
+            p1.next = temp;
+            p1 = temp.next;
+        }
+
+    }
+
+
+
 }
