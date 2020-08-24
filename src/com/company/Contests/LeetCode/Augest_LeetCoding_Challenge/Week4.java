@@ -1,5 +1,6 @@
 package com.company.Contests.LeetCode.Augest_LeetCoding_Challenge;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.TreeMap;
 
@@ -41,5 +42,36 @@ public class Week4 {
             int y = rect[1] + (key - randInt - 1) / (rect[2] - rect[0] + 1);
             return new int[]{x, y};
         }
+
+
+
+
+         // Day 24: Sort Array By Parity
+        /** Given an array A of non-negative integers, return an array consisting of all the even elements of A,
+         *  followed by all the odd elements of A.
+         You may return any answer array that satisfies this condition.*/
+
+        public int[] sortArrayByParity(int[] A) {
+            /*
+            Integer[] B = new Integer[A.length];
+            for (int t = 0; t < A.length; ++t)
+                B[t] = A[t];
+
+            Arrays.sort(B, (a, b) -> Integer.compare(a%2, b%2));
+
+            for (int t = 0; t < A.length; ++t)
+                A[t] = B[t];
+            return A;
+        */
+
+       //  Alternative:
+        return Arrays.stream(A)
+                     .boxed()
+                     .sorted((a, b) -> Integer.compare(a%2, b%2))
+                     .mapToInt(i -> i)
+                     .toArray();
+
+        }
+
     }
 }
