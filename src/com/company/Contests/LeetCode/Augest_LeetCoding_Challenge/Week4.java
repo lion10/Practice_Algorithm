@@ -1,8 +1,6 @@
 package com.company.Contests.LeetCode.Augest_LeetCoding_Challenge;
 
-import java.util.Arrays;
-import java.util.Random;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Week4 {
 
@@ -46,32 +44,126 @@ public class Week4 {
 
 
 
-         // Day 24: Sort Array By Parity
-        /** Given an array A of non-negative integers, return an array consisting of all the even elements of A,
-         *  followed by all the odd elements of A.
-         You may return any answer array that satisfies this condition.*/
+        class Trie {
 
-        public int[] sortArrayByParity(int[] A) {
-            /*
-            Integer[] B = new Integer[A.length];
-            for (int t = 0; t < A.length; ++t)
-                B[t] = A[t];
+            Trie[] children;
+            boolean isEnd;
 
-            Arrays.sort(B, (a, b) -> Integer.compare(a%2, b%2));
-
-            for (int t = 0; t < A.length; ++t)
-                A[t] = B[t];
-            return A;
-        */
-
-       //  Alternative:
-        return Arrays.stream(A)
-                     .boxed()
-                     .sorted((a, b) -> Integer.compare(a%2, b%2))
-                     .mapToInt(i -> i)
-                     .toArray();
-
+            public Trie () {
+                children = new Trie[26];
+                isEnd = false;
+            }
         }
 
+
+
+        // Day 23:  Stream of Characters
+        /** Implement the StreamChecker class as follows:
+
+         StreamChecker(words): Constructor, init the data structure with the given words.
+         query(letter): returns true if and only if for some k >= 1, the last k characters
+         queried (in order from oldest to newest,
+         including this letter just queried) spell one of the words in the given list.*/
+        class StreamChecker {
+
+            Trie root;
+            List<Character> list;
+
+            public StreamChecker (String[] words) {
+
+                root = new Trie ();
+                list = new LinkedList<>();
+
+                for (String word : words) {
+                    insertWord (word);
+                }
+            }
+
+            public void insertWord (String word) {
+
+                Trie node = root;
+
+                for (int i = word.length () - 1; i >= 0; i--) {
+                    char letter = word.charAt (i);
+                    if (node.children[letter - 'a'] == null) {
+                        node.children[letter - 'a'] = new Trie ();
+                    }
+                    node = node.children[letter - 'a'];
+                }
+
+                node.isEnd = true;
+            }
+
+            public boolean query (char letter) {
+
+                list.add (letter);
+                return searchWord ();
+            }
+
+            public boolean searchWord () {
+
+                Trie node = root;
+                for (int i = list.size () - 1; i >= 0; i--) {
+                    char letter = list.get (i);
+                    if (node.children[letter - 'a'] == null) {
+                        return false;
+                    }
+                    node = node.children[letter - 'a'];
+                    if (node.isEnd) {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        }
+
+
+
+
+        // Day 24:  Stream of Characters
+
+        /** Find the sum of all left leaves in a given binary tree.
+         */
+
+       public class TreeNode {
+            int val;
+            TreeNode left;
+            TreeNode right;
+
+            TreeNode() {
+            }
+
+            TreeNode(int val) {
+                this.val = val;
+            }
+
+            TreeNode(int val, TreeNode left, TreeNode right) {
+                this.val = val;
+                this.left = left;
+                this.right = right;
+            }
+        }
+
+        int result=0;
+        public int sumOfLeftLeaves(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            dfs(root);
+            return result;
+        }
+
+        public void dfs(TreeNode root){
+            if(root.left!=null){
+                if(root.left.left==null && root.left.right==null){
+                    result+=root.left.val;
+                }
+                dfs(root.left);
+            }
+            if(root.right!=null){
+                dfs(root.right);
+            }
+        }
     }
 }
