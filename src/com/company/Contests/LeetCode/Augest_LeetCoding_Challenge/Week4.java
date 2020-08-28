@@ -241,5 +241,59 @@ public class Week4 {
 
             return ans;
         }
+
+
+        // Day 27: Find Right Interval
+        /**
+         * Given a set of intervals, for each of the interval i, check if there exists an interval
+         * j whose start point is bigger than or equal to the end point of the interval i,
+         * which can be called that j is on the "right" of i.
+         * For any interval i, you need to store the minimum interval j's index,
+         * which means that the interval j has the minimum start point to build the "right" relationship for interval i. If the interval j doesn't exist, store -1 for the interval i.
+         * Finally, you need output the stored value of each interval as an array.*/
+
+        public int[] findRightInterval(int[][] intervals) {
+
+            // edge cases
+            int rows = intervals.length;
+            if (rows == 0) return new int[0];
+            if (rows < 2) return new int[]{-1};
+
+            // save all start points into the map
+            // start point - key.
+            // interval index - value
+            Map<Integer, Integer> map = new HashMap<>();
+            // count max possible start point
+            int max = Integer.MIN_VALUE;
+            for (int i = 0; i < rows; i++) {
+                int[] row = intervals[i];
+                map.put(row[0], i);
+                max = Math.max(max, row[0]);
+            }
+
+            // Create result array and fill with -1 for cases when no solution found
+            int[] result = new int[rows];
+            Arrays.fill(result, -1);
+            // iterate over all intervals
+            for (int i = 0; i < rows; i++) {
+                int[] row = intervals[i];
+                int min = row[1];
+                // if interval end point is greater than max start point - there is no 'right' interval for it.
+                // -1 will be saved for this interval
+                if (min > max) {
+                    continue;
+                }
+                // starting from nearest 'right' interval with start point equal to current end point
+                // iterating and searching for the first interval fitting our expectations
+                while (min <= max && result[i] == -1) {
+                    if (map.containsKey(min)) {
+                        result[i] = map.get(min);
+                        break;
+                    }
+                    min++;
+                }
+            }
+            return result;
+        }
     }
 }
