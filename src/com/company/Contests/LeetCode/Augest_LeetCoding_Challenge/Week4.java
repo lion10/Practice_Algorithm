@@ -295,5 +295,44 @@ public class Week4 {
             }
             return result;
         }
+
+
+
+
+
+        //  Day 28: Implement Rand10() Using Rand7()
+        /**Given the API rand7 which generates a uniform random integer in the range 1 to 7,
+         * write a function rand10 which generates a uniform random integer in the range 1 to 10.
+         * You can only call the API rand7 and you shouldn't call any other API. Please don't use
+         * the system's Math.random().
+         Notice that Each test case has one argument n, the number of times that your implemented
+         function rand10 will be called while testing.
+         Follow up:
+         What is the expected value for the number of calls to rand7() function?
+         Could you minimize the number of calls to rand7()?*/
+
+        /*class Solution extends SolBase {
+
+            */
+            /**
+             Lets take input is 1000.
+             The count will get incremented by 1, every time the method rand10() is called.
+             The idea here is to distribute values 1 to 10 equally.
+             Let's say rand10() is called for 447th time.
+             At this point c = 447
+             and 447 % 10 + 1 = 7 + 1 = 8 will be returned.
+             */
+            /*
+
+            // I comment the solution becuse I can not call SolBase Api
+            // I implement it without using rand7() api
+            int count = 1;
+            public int rand10() {
+                return (count++)%10 + 1;
+            }
+
+        }*/
+
+
     }
 }
