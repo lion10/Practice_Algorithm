@@ -102,4 +102,103 @@ public class Week5 {
         }
         return count;
     }
+
+
+    // Day 31: delete node in a bst
+    /**
+     * Given a root node reference of a BST and a key, delete the
+     * node with the given key in the BST. Return the root node reference (possibly updated) of the BST.
+        Basically, the deletion can be divided into two stages:
+        Search for a node to remove.
+        If the node is found, delete the node.
+                Note: Time complexity should be O(height of tree).
+
+    }*/
+     public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode() {}
+        TreeNode(int val) { this.val = val; }
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    public TreeNode inPre(TreeNode root)
+    {
+        while(root!=null && root.right!=null)
+        {
+            root=root.right;
+        }
+        return root;
+    }
+    public TreeNode inSuc(TreeNode root)
+    {
+        while(root!=null && root.left!=null)
+        {
+            root=root.left;
+        }
+        return root;
+    }
+    public int height(TreeNode root)
+    {
+        int x,y;
+        if(root!=null)
+        {
+            x=height(root.left);
+            y=height(root.right);
+            if(x>y)
+                return x+1;
+            else
+                return y+1;
+        }
+        else
+            return 0;
+    }
+    public TreeNode deleteNode(TreeNode root, int key) {
+        TreeNode q;
+        if(root==null)
+            return null;
+        if(key<root.val)
+        {
+            root.left=deleteNode(root.left,key);
+        }
+        else if(key>root.val)
+        {
+            root.right=deleteNode(root.right,key);
+        }
+        else
+        {
+            if(root.left!=null && root.right!=null)
+            {
+                if(height(root.left)>=height(root.right))
+                {
+                    q=inPre(root.left);
+                    root.val=q.val;
+                    root.left=deleteNode(root.left,q.val);
+                }
+                else if(height(root.left)<height(root.right))
+                {
+                    q=inSuc(root.right);
+                    root.val=q.val;
+                    root.right=deleteNode(root.right,q.val);
+                }
+            }
+            else if(root.left!=null)
+            {
+                root=root.left;
+            }
+            else if(root.right!=null)
+            {
+                root=root.right;
+            }
+            else
+                root=null;
+        }
+        return root;
+
+    }
 }
